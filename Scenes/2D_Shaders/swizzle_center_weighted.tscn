@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c8ox7od13vw6o"]
+
+[ext_resource type="Shader" uid="uid://bwo7nyfetumxe" path="res://Shaders/2D/Swizzle_Center_Weighted.gdshader" id="1_wc6hc"]
+[ext_resource type="Texture2D" uid="uid://b78ln46at8xgw" path="res://VGDC_Logo.png" id="2_wc6hc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_368fq"]
+shader = ExtResource("1_wc6hc")
+shader_parameter/surface_width = 0.025
+
+[node name="Swizzle_Center_Weighted" type="Control" unique_id=85944472]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=581889614]
+material = SubResource("ShaderMaterial_368fq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wc6hc")
+expand_mode = 1

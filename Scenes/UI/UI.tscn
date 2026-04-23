@@ -1,0 +1,203 @@
+[gd_scene format=3 uid="uid://doiq3dyreswth"]
+
+[ext_resource type="Script" uid="uid://bvu6io8p5d5ig" path="res://Scenes/UI/ui_root.gd" id="1_s86y4"]
+[ext_resource type="Script" uid="uid://datc6emw46uyr" path="res://Scenes/UI/ui_settings.gd" id="2_636u5"]
+
+[node name="UI" type="Control" unique_id=1887882613 node_paths=PackedStringArray("code_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s86y4")
+code_label = NodePath("MarginContainer2/PanelContainer/MarginContainer/VBoxContainer/RichTextLabel_Code")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2097808444]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -204.0
+offset_right = 120.0
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1522790331 node_paths=PackedStringArray("amplitude_label", "amplitude_slider", "speed_label", "speed_slider", "x_offset_label", "x_offset_slider", "y_offset_label", "y_offset_slider", "wavelength_label", "wavelength_slider", "highlight_size_label", "highlight_size_slider")]
+layout_mode = 2
+script = ExtResource("2_636u5")
+amplitude_label = NodePath("MarginContainer/VBoxContainer/Label_amplitude")
+amplitude_slider = NodePath("MarginContainer/VBoxContainer/HSlider_amplitude")
+speed_label = NodePath("MarginContainer/VBoxContainer/Label_speed")
+speed_slider = NodePath("MarginContainer/VBoxContainer/HSlider_speed")
+x_offset_label = NodePath("MarginContainer/VBoxContainer/Label_x_offset")
+x_offset_slider = NodePath("MarginContainer/VBoxContainer/HSlider_x_offset")
+y_offset_label = NodePath("MarginContainer/VBoxContainer/Label_y_offset")
+y_offset_slider = NodePath("MarginContainer/VBoxContainer/HSlider_y_offset")
+wavelength_label = NodePath("MarginContainer/VBoxContainer/Label_wavelength")
+wavelength_slider = NodePath("MarginContainer/VBoxContainer/HSlider_wavelength")
+highlight_size_label = NodePath("MarginContainer/VBoxContainer/Label_wave_size")
+highlight_size_slider = NodePath("MarginContainer/VBoxContainer/HSlider_wave_size")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer" unique_id=1608281406]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer" unique_id=1281363779]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1782759601]
+layout_mode = 2
+selected = 0
+item_count = 6
+popup/item_0/text = "Base Wave"
+popup/item_0/id = 0
+popup/item_1/text = "Logo Wave (Swizzle)"
+popup/item_1/id = 4
+popup/item_2/text = "Swizzle Wave"
+popup/item_2/id = 5
+popup/item_3/text = "Swizzle Centered"
+popup/item_3/id = 1
+popup/item_4/text = "Swizzle Duplicate"
+popup/item_4/id = 3
+popup/item_5/text = "Vertex Wave"
+popup/item_5/id = 2
+
+[node name="UVCheckBox" type="CheckBox" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=979650838]
+layout_mode = 2
+text = "Use UV Colors"
+
+[node name="Label_amplitude" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=573658800]
+layout_mode = 2
+text = "Amplitude: "
+
+[node name="HSlider_amplitude" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1950052451]
+layout_mode = 2
+min_value = 0.001
+max_value = 2.0
+step = 0.001
+value = 1.0
+
+[node name="Label_wavelength" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=636064399]
+layout_mode = 2
+text = "Wavelength: "
+
+[node name="HSlider_wavelength" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=424722718]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+min_value = 0.001
+max_value = 2.0
+step = 0.001
+value = 1.0
+
+[node name="Label_speed" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=958550071]
+layout_mode = 2
+text = "Speed: "
+
+[node name="HSlider_speed" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=454737431]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+min_value = -5.0
+max_value = 5.0
+step = 0.1
+value = 1.0
+
+[node name="Label_x_offset" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1736020106]
+layout_mode = 2
+text = "X Offset: "
+
+[node name="HSlider_x_offset" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=387234136]
+layout_mode = 2
+min_value = -2.0
+max_value = 2.0
+step = 0.01
+
+[node name="Label_y_offset" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=763350184]
+layout_mode = 2
+text = "Y Offset: "
+
+[node name="HSlider_y_offset" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=281235367]
+layout_mode = 2
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+
+[node name="Label_wave_size" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=324587472]
+layout_mode = 2
+text = "Wave Size: "
+
+[node name="HSlider_wave_size" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1987162834]
+layout_mode = 2
+max_value = 2.0
+step = 0.001
+value = 0.025
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=484870167]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -51.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer2" unique_id=1025782554]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/PanelContainer" unique_id=231440376]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/PanelContainer/MarginContainer" unique_id=243548272]
+layout_mode = 2
+
+[node name="RichTextLabel_Code" type="RichTextLabel" parent="MarginContainer2/PanelContainer/MarginContainer/VBoxContainer" unique_id=1548702557]
+visible = false
+custom_minimum_size = Vector2(900, 300)
+layout_mode = 2
+text = "void fragment() {
+	vec2 uv = UV;
+	float wave_height = sin(uv.x * (2.0 / wavelength) + TIME * speed) * amplitude  + 0.5 + y_offset;
+	if (uv.y > wave_height) {
+		COLOR = primary_color;
+		if (use_uv_color) {
+			COLOR = vec4(uv, 0.0,1.0);
+		}
+	}
+	else {
+		COLOR = secondary_color;
+		if (use_uv_color) {
+			COLOR = vec4(uv, 0.0,1.0);
+		}
+	}
+	if (uv.y > wave_height - (highlight_size) / 2.0) if (uv.y < wave_height + (highlight_size) / 2.0) {
+		COLOR = highlight_color;
+	}
+}"
+
+[node name="Show_Code_CheckBox" type="CheckBox" parent="MarginContainer2/PanelContainer/MarginContainer/VBoxContainer" unique_id=1458290816]
+layout_mode = 2
+text = "Show Code"
+
+[connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/UVCheckBox" to="MarginContainer/PanelContainer" method="_on_uv_check_box_toggled"]
+[connection signal="value_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HSlider_amplitude" to="MarginContainer/PanelContainer" method="_on_h_slider_amplitude_value_changed"]
+[connection signal="value_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HSlider_wavelength" to="MarginContainer/PanelContainer" method="_on_h_slider_wavelength_value_changed"]
+[connection signal="value_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HSlider_speed" to="MarginContainer/PanelContainer" method="_on_h_slider_speed_value_changed"]
+[connection signal="value_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HSlider_x_offset" to="MarginContainer/PanelContainer" method="_on_h_slider_x_offset_value_changed"]
+[connection signal="value_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HSlider_y_offset" to="MarginContainer/PanelContainer" method="_on_h_slider_y_offset_value_changed"]
+[connection signal="value_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HSlider_wave_size" to="MarginContainer/PanelContainer" method="_on_h_slider_wave_size_value_changed"]
+[connection signal="toggled" from="MarginContainer2/PanelContainer/MarginContainer/VBoxContainer/Show_Code_CheckBox" to="." method="_on_show_code_check_box_toggled"]

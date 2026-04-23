@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bv7fyk1ro6hmy"]
+
+[ext_resource type="PackedScene" uid="uid://dmejvufjwvnxq" path="res://Scenes/3D_Shaders/box_wave.tscn" id="1_qk6iy"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qk6iy"]
+
+[sub_resource type="Sky" id="Sky_7akbu"]
+sky_material = SubResource("ProceduralSkyMaterial_qk6iy")
+
+[sub_resource type="Environment" id="Environment_qk6iy"]
+background_mode = 2
+sky = SubResource("Sky_7akbu")
+ambient_light_source = 3
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_qk6iy"]
+
+[sub_resource type="Compositor" id="Compositor_7akbu"]
+
+[node name="Node3D" type="Node" unique_id=897794853]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=595582839]
+environment = SubResource("Environment_qk6iy")
+camera_attributes = SubResource("CameraAttributesPractical_qk6iy")
+compositor = SubResource("Compositor_7akbu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2072272565]
+transform = Transform3D(0.89493436, 0.30202055, 0.32844493, 0, -0.73609716, 0.6768759, 0.4461978, -0.6057595, -0.65875864, 0, 0, 0)
+
+[node name="Box_Wave" parent="." unique_id=1331723603 instance=ExtResource("1_qk6iy")]
+
+[node name="Control" type="Control" parent="." unique_id=657164839]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=2092950721]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=1926022242]
+transform = Transform3D(0.57357645, -0.28016648, 0.76975113, 0, 0.9396926, 0.34202012, -0.81915206, -0.1961747, 0.53898555, 7, 3, 6)
+
+[node name="Camera3D" type="Camera3D" parent="Marker3D" unique_id=1578187041]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+current = true

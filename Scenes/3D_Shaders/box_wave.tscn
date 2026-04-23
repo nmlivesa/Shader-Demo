@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dmejvufjwvnxq"]
+
+[ext_resource type="Shader" uid="uid://bjvkmsmqjq02w" path="res://Shaders/3D/Box_Wave.gdshader" id="1_5plv4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_nsqe8"]
+subdivide_width = 3
+subdivide_height = 3
+subdivide_depth = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7on43"]
+render_priority = 0
+shader = ExtResource("1_5plv4")
+
+[node name="Box_Wave" type="Node3D" unique_id=1331723603]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=505986905]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_nsqe8")
+material = SubResource("ShaderMaterial_7on43")

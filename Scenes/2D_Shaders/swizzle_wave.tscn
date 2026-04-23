@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dx0ohxbyds5fp"]
+
+[ext_resource type="Shader" uid="uid://bvkuf0upk2kyr" path="res://Shaders/2D/swizzle_wave.gdshader" id="1_ihk64"]
+[ext_resource type="Texture2D" uid="uid://b78ln46at8xgw" path="res://VGDC_Logo.png" id="2_etknt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lapho"]
+shader = ExtResource("1_ihk64")
+
+[node name="swizzle_wave" type="Control" unique_id=1128184231]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=730306682]
+material = SubResource("ShaderMaterial_lapho")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_etknt")
+expand_mode = 1

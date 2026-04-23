@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://y5ex25kyu17p"]
+
+[ext_resource type="Shader" uid="uid://c4gcok6773v75" path="res://Shaders/2D/wave_frag.gdshader" id="1_ndb4k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qjri4"]
+shader = ExtResource("1_ndb4k")
+shader_parameter/surface_width = 0.025
+
+[node name="WaveVisualized" type="Control" unique_id=1908355530]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=726989941]
+material = SubResource("ShaderMaterial_qjri4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

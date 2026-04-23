@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bsolntuw8rlfx"]
+
+[ext_resource type="Shader" uid="uid://cp3eqc7km7fn0" path="res://Shaders/2D/wave_logo.gdshader" id="1_8bsdt"]
+[ext_resource type="Texture2D" uid="uid://b78ln46at8xgw" path="res://VGDC_Logo.png" id="2_0iui5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7k13c"]
+shader = ExtResource("1_8bsdt")
+
+[node name="Wave_Logo" type="Control" unique_id=1903527295]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=565963728]
+material = SubResource("ShaderMaterial_7k13c")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0iui5")
+expand_mode = 1

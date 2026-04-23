@@ -1,0 +1,77 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Shader Demo"
+run/main_scene="uid://btv4rq47ni8f7"
+config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+Manager="*uid://cuwkqimlhgxrm"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="viewport"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
+
+[shader_globals]
+
+primary_color={
+"type": "color",
+"value": Color(0.4331607, 0.74233973, 1, 1)
+}
+secondary_color={
+"type": "color",
+"value": Color(0.6986348, 0.8525161, 0.9412011, 1)
+}
+highlight_color={
+"type": "color",
+"value": Color(1, 1, 1, 1)
+}
+use_uv_color={
+"type": "bool",
+"value": false
+}
+y_offset={
+"type": "float",
+"value": 0.0
+}
+x_offset={
+"type": "float",
+"value": 0.0
+}
+amplitude={
+"type": "float",
+"value": 1.0
+}
+speed={
+"type": "float",
+"value": 1.0
+}
+wavelength={
+"type": "float",
+"value": 1.0
+}
+highlight_size={
+"type": "float",
+"value": 0.025
+}

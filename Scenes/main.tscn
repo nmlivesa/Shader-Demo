@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://btv4rq47ni8f7"]
+
+[ext_resource type="PackedScene" uid="uid://c8ox7od13vw6o" path="res://Scenes/2D_Shaders/swizzle_center_weighted.tscn" id="1_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://doiq3dyreswth" path="res://Scenes/UI/UI.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://y5ex25kyu17p" path="res://Scenes/2D_Shaders/wave_visualized.tscn" id="2_8gbba"]
+[ext_resource type="PackedScene" uid="uid://clltpm5sjnl0m" path="res://Scenes/3D_Shaders/plane_wave.tscn" id="3_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://54yqcowkms3v" path="res://Scenes/2D_Shaders/swizzle_duplicate.tscn" id="4_21xkr"]
+[ext_resource type="PackedScene" uid="uid://dx0ohxbyds5fp" path="res://Scenes/2D_Shaders/swizzle_wave.tscn" id="4_344ge"]
+[ext_resource type="PackedScene" uid="uid://bdfjipn65ltk0" path="res://Scenes/2D_Shaders/sine_wave.tscn" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://bsolntuw8rlfx" path="res://Scenes/2D_Shaders/wave_logo.tscn" id="6_6bp64"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jjvhh"]
+
+[sub_resource type="Sky" id="Sky_kry3j"]
+sky_material = SubResource("ProceduralSkyMaterial_jjvhh")
+
+[sub_resource type="Environment" id="Environment_21xkr"]
+background_mode = 2
+sky = SubResource("Sky_kry3j")
+
+[node name="Main" type="Node" unique_id=1128569319]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1189186146]
+
+[node name="UI" parent="CanvasLayer" unique_id=1887882613 node_paths=PackedStringArray("base_wave", "wave_logo", "swizzle_wave", "swizzle_center_weighted", "swizzle_duplicate", "plane_wave", "view3d") instance=ExtResource("1_jjgbg")]
+base_wave = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/WaveVisualized")
+wave_logo = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/Wave_Logo")
+swizzle_wave = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/swizzle_wave")
+swizzle_center_weighted = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/Swizzle_Center_weighted")
+swizzle_duplicate = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/Swizzle_Duplicate")
+plane_wave = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport/plane_wave")
+view3d = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1813909130]
+layer = 0
+
+[node name="Control" type="Control" parent="CanvasLayer2" unique_id=507733778]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/Control" unique_id=1443537078]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -490.0
+offset_top = -280.0
+offset_right = 490.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/Control/PanelContainer" unique_id=1564031901]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/Control/PanelContainer/MarginContainer" unique_id=1181713624]
+custom_minimum_size = Vector2(960, 540)
+layout_mode = 2
+
+[node name="WaveVisualized" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer" unique_id=1908355530 instance=ExtResource("2_8gbba")]
+layout_mode = 2
+
+[node name="Wave_Logo" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer" unique_id=1903527295 instance=ExtResource("6_6bp64")]
+visible = false
+layout_mode = 2
+
+[node name="swizzle_wave" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer" unique_id=1128184231 instance=ExtResource("4_344ge")]
+visible = false
+layout_mode = 2
+
+[node name="Swizzle_Center_weighted" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer" unique_id=85944472 instance=ExtResource("1_bo1nx")]
+visible = false
+layout_mode = 2
+
+[node name="Swizzle_Duplicate" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer" unique_id=629877368 instance=ExtResource("4_21xkr")]
+visible = false
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer" unique_id=782579364]
+visible = false
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer" unique_id=1562033943]
+handle_input_locally = false
+size = Vector2i(960, 540)
+render_target_update_mode = 0
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport" unique_id=984528058]
+transform = Transform3D(0.61566144, -0.1368366, 0.77603894, 0, 0.98480767, 0.17364815, -0.7880106, -0.10690849, 0.6063081, 6, 2.5, 5)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport" unique_id=2042347883]
+transform = Transform3D(-0.29737484, 0.43345234, -0.8506981, 0, 0.8910065, 0.45399052, 0.9547608, 0.13500535, -0.26496294, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport" unique_id=1965130196]
+environment = SubResource("Environment_21xkr")
+
+[node name="plane_wave" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport" unique_id=1519163532 instance=ExtResource("3_jjvhh")]
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="." unique_id=1332365691]
+layer = -2
+
+[node name="sine_wave" parent="CanvasLayer3" unique_id=469876622 instance=ExtResource("4_jjvhh")]

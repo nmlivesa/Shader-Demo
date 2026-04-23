@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://54yqcowkms3v"]
+
+[ext_resource type="Shader" uid="uid://dkakfhcjxem3r" path="res://Shaders/2D/swizzle_duplicate.gdshader" id="1_0blnd"]
+[ext_resource type="Texture2D" uid="uid://b78ln46at8xgw" path="res://VGDC_Logo.png" id="2_0eoib"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_15bk5"]
+shader = ExtResource("1_0blnd")
+shader_parameter/surface_width = 0.025
+
+[node name="Swizzle_Duplicate" type="Control" unique_id=629877368]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=973499303]
+material = SubResource("ShaderMaterial_15bk5")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0eoib")
+expand_mode = 1
