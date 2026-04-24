@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bpnkwvpgx56lj"]
+
+[ext_resource type="Script" uid="uid://cq312p42w4vsp" path="res://Scenes/2D_Shaders/sine_wave_lerped.gd" id="1_duigb"]
+[ext_resource type="Shader" uid="uid://bvkuf0upk2kyr" path="res://Shaders/2D/swizzle_wave.gdshader" id="1_kaeq6"]
+[ext_resource type="Shader" uid="uid://cyb7dgxtrqtag" path="res://Shaders/2D/sine_wave_lerped.gdshader" id="1_mmlj5"]
+[ext_resource type="Texture2D" uid="uid://b78ln46at8xgw" path="res://VGDC_Logo.png" id="2_duigb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rs5pn"]
+shader = ExtResource("1_kaeq6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f17a0"]
+shader = ExtResource("1_mmlj5")
+
+[node name="sine_wave_lerped" type="Control" unique_id=1917794210 node_paths=PackedStringArray("logo")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_duigb")
+logo = NodePath("SubViewportContainer/SubViewport/TextureRect")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1154119904]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1587134612]
+handle_input_locally = false
+size = Vector2i(960, 540)
+render_target_clear_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=1497916815]
+visible = false
+material = SubResource("ShaderMaterial_rs5pn")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_duigb")
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=2055629304]
+material = SubResource("ShaderMaterial_f17a0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

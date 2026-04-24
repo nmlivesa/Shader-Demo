@@ -25,6 +25,9 @@ var wavelength_text : String = "Wavelength: "
 var highlight_size_text : String = "Wave Size: "
 
 
+@export var primary_color_picker : ColorPickerButton
+@export var secondary_color_picker : ColorPickerButton
+@export var highlight_color_picker : ColorPickerButton
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	setup_labels(amplitude_label, amplitude_text, amplitude_slider)
@@ -34,6 +37,9 @@ func _ready() -> void:
 	setup_labels(wavelength_label, wavelength_text, wavelength_slider)
 	setup_labels(highlight_size_label, highlight_size_text, highlight_size_slider)
 	
+	primary_color_picker.color = Color(0.431, 0.741, 1.0)
+	secondary_color_picker.color = Color(0.922, 0.776, 0.863)
+	highlight_color_picker.color = Color(0.,0.,0,1.)
 
 
 
@@ -70,3 +76,15 @@ func _on_h_slider_wave_size_value_changed(value: float) -> void:
 
 func _on_uv_check_box_toggled(toggled_on: bool) -> void:
 	RenderingServer.global_shader_parameter_set("use_uv_color", toggled_on)
+
+
+func _on_color_picker_button_primary_color_changed(color: Color) -> void:
+	RenderingServer.global_shader_parameter_set("primary_color", color)
+
+
+func _on_color_picker_button_secondary_color_changed(color: Color) -> void:
+	RenderingServer.global_shader_parameter_set("secondary_color", color)
+
+
+func _on_color_picker_button_highlight_color_changed(color: Color) -> void:
+	RenderingServer.global_shader_parameter_set("highlight_color", color)

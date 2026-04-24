@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dx0ohxbyds5fp" path="res://Scenes/2D_Shaders/swizzle_wave.tscn" id="4_344ge"]
 [ext_resource type="PackedScene" uid="uid://bdfjipn65ltk0" path="res://Scenes/2D_Shaders/sine_wave.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://bsolntuw8rlfx" path="res://Scenes/2D_Shaders/wave_logo.tscn" id="6_6bp64"]
+[ext_resource type="PackedScene" uid="uid://bpnkwvpgx56lj" path="res://Scenes/2D_Shaders/sine_wave_lerped.tscn" id="7_ynf5e"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jjvhh"]
 
@@ -22,14 +23,15 @@ sky = SubResource("Sky_kry3j")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1189186146]
 
-[node name="UI" parent="CanvasLayer" unique_id=1887882613 node_paths=PackedStringArray("base_wave", "wave_logo", "swizzle_wave", "swizzle_center_weighted", "swizzle_duplicate", "plane_wave", "view3d") instance=ExtResource("1_jjgbg")]
-base_wave = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/WaveVisualized")
-wave_logo = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/Wave_Logo")
-swizzle_wave = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/swizzle_wave")
-swizzle_center_weighted = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/Swizzle_Center_weighted")
-swizzle_duplicate = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/Swizzle_Duplicate")
-plane_wave = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport/plane_wave")
-view3d = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer")
+[node name="UI" parent="CanvasLayer" unique_id=1887882613 node_paths=PackedStringArray("base_wave", "wave_logo", "swizzle_wave", "swizzle_center_weighted", "swizzle_duplicate", "wave_lerped", "plane_wave", "view3d") instance=ExtResource("1_jjgbg")]
+base_wave = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport/WaveVisualized")
+wave_logo = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport/Wave_Logo")
+swizzle_wave = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport/swizzle_wave")
+swizzle_center_weighted = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport/Swizzle_Center_weighted")
+swizzle_duplicate = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport/Swizzle_Duplicate")
+wave_lerped = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport/sine_wave_lerped")
+plane_wave = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport/SubViewportContainer/SubViewport/plane_wave")
+view3d = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport/SubViewportContainer")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1813909130]
 layer = 0
@@ -73,44 +75,54 @@ theme_override_constants/margin_bottom = 10
 custom_minimum_size = Vector2(960, 540)
 layout_mode = 2
 
-[node name="WaveVisualized" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer" unique_id=1908355530 instance=ExtResource("2_8gbba")]
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer" unique_id=1015522215]
 layout_mode = 2
 
-[node name="Wave_Logo" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer" unique_id=1903527295 instance=ExtResource("6_6bp64")]
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2" unique_id=1982596695]
+handle_input_locally = false
+size = Vector2i(960, 540)
+render_target_update_mode = 4
+
+[node name="WaveVisualized" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport" unique_id=1908355530 instance=ExtResource("2_8gbba")]
+
+[node name="Wave_Logo" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport" unique_id=1903527295 instance=ExtResource("6_6bp64")]
 visible = false
-layout_mode = 2
 
-[node name="swizzle_wave" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer" unique_id=1128184231 instance=ExtResource("4_344ge")]
+[node name="swizzle_wave" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport" unique_id=1128184231 instance=ExtResource("4_344ge")]
 visible = false
-layout_mode = 2
 
-[node name="Swizzle_Center_weighted" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer" unique_id=85944472 instance=ExtResource("1_bo1nx")]
+[node name="Swizzle_Center_weighted" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport" unique_id=85944472 instance=ExtResource("1_bo1nx")]
 visible = false
-layout_mode = 2
 
-[node name="Swizzle_Duplicate" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer" unique_id=629877368 instance=ExtResource("4_21xkr")]
+[node name="Swizzle_Duplicate" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport" unique_id=629877368 instance=ExtResource("4_21xkr")]
 visible = false
-layout_mode = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer" unique_id=782579364]
+[node name="sine_wave_lerped" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport" unique_id=1917794210 instance=ExtResource("7_ynf5e")]
 visible = false
-layout_mode = 2
 
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer" unique_id=1562033943]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport" unique_id=782579364]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport/SubViewportContainer" unique_id=1562033943]
 handle_input_locally = false
 size = Vector2i(960, 540)
 render_target_update_mode = 0
 
-[node name="Camera3D" type="Camera3D" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport" unique_id=984528058]
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport/SubViewportContainer/SubViewport" unique_id=984528058]
 transform = Transform3D(0.61566144, -0.1368366, 0.77603894, 0, 0.98480767, 0.17364815, -0.7880106, -0.10690849, 0.6063081, 6, 2.5, 5)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport" unique_id=2042347883]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport/SubViewportContainer/SubViewport" unique_id=2042347883]
 transform = Transform3D(-0.29737484, 0.43345234, -0.8506981, 0, 0.8910065, 0.45399052, 0.9547608, 0.13500535, -0.26496294, 0, 0, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport" unique_id=1965130196]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport/SubViewportContainer/SubViewport" unique_id=1965130196]
 environment = SubResource("Environment_21xkr")
 
-[node name="plane_wave" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport" unique_id=1519163532 instance=ExtResource("3_jjvhh")]
+[node name="plane_wave" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer2/SubViewport/SubViewportContainer/SubViewport" unique_id=1519163532 instance=ExtResource("3_jjvhh")]
 
 [node name="CanvasLayer3" type="CanvasLayer" parent="." unique_id=1332365691]
 layer = -2

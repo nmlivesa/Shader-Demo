@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bvu6io8p5d5ig" path="res://Scenes/UI/ui_root.gd" id="1_s86y4"]
 [ext_resource type="Script" uid="uid://datc6emw46uyr" path="res://Scenes/UI/ui_settings.gd" id="2_636u5"]
 
-[node name="UI" type="Control" unique_id=1887882613 node_paths=PackedStringArray("code_label")]
+[node name="UI" type="Control" unique_id=1887882613 node_paths=PackedStringArray("add_logo", "wave_lerped_label", "code_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s86y4")
+add_logo = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/AddLogoCheckBox")
+wave_lerped_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Wave_lerpedLabel")
 code_label = NodePath("MarginContainer2/PanelContainer/MarginContainer/VBoxContainer/RichTextLabel_Code")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2097808444]
@@ -24,7 +26,7 @@ grow_vertical = 0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1522790331 node_paths=PackedStringArray("amplitude_label", "amplitude_slider", "speed_label", "speed_slider", "x_offset_label", "x_offset_slider", "y_offset_label", "y_offset_slider", "wavelength_label", "wavelength_slider", "highlight_size_label", "highlight_size_slider")]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1522790331 node_paths=PackedStringArray("amplitude_label", "amplitude_slider", "speed_label", "speed_slider", "x_offset_label", "x_offset_slider", "y_offset_label", "y_offset_slider", "wavelength_label", "wavelength_slider", "highlight_size_label", "highlight_size_slider", "primary_color_picker", "secondary_color_picker", "highlight_color_picker")]
 layout_mode = 2
 script = ExtResource("2_636u5")
 amplitude_label = NodePath("MarginContainer/VBoxContainer/Label_amplitude")
@@ -39,6 +41,9 @@ wavelength_label = NodePath("MarginContainer/VBoxContainer/Label_wavelength")
 wavelength_slider = NodePath("MarginContainer/VBoxContainer/HSlider_wavelength")
 highlight_size_label = NodePath("MarginContainer/VBoxContainer/Label_wave_size")
 highlight_size_slider = NodePath("MarginContainer/VBoxContainer/HSlider_wave_size")
+primary_color_picker = NodePath("MarginContainer/VBoxContainer/ColorPickerButton_Primary")
+secondary_color_picker = NodePath("MarginContainer/VBoxContainer/ColorPickerButton_Secondary")
+highlight_color_picker = NodePath("MarginContainer/VBoxContainer/ColorPickerButton_highlight")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer" unique_id=1608281406]
 layout_mode = 2
@@ -51,10 +56,16 @@ theme_override_constants/margin_bottom = 10
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
+[node name="Wave_lerpedLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=311053842]
+visible = false
+layout_mode = 2
+text = "Try messing with the x offset
+Values between -0.5 and -1.0 for best results"
+
 [node name="OptionButton" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1782759601]
 layout_mode = 2
 selected = 0
-item_count = 6
+item_count = 7
 popup/item_0/text = "Base Wave"
 popup/item_0/id = 0
 popup/item_1/text = "Logo Wave (Swizzle)"
@@ -65,12 +76,19 @@ popup/item_3/text = "Swizzle Centered"
 popup/item_3/id = 1
 popup/item_4/text = "Swizzle Duplicate"
 popup/item_4/id = 3
-popup/item_5/text = "Vertex Wave"
-popup/item_5/id = 2
+popup/item_5/text = "Wave Lerped"
+popup/item_5/id = 6
+popup/item_6/text = "Vertex Wave"
+popup/item_6/id = 2
 
 [node name="UVCheckBox" type="CheckBox" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=979650838]
 layout_mode = 2
 text = "Use UV Colors"
+
+[node name="AddLogoCheckBox" type="CheckBox" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1977247561]
+visible = false
+layout_mode = 2
+text = "Add Logo"
 
 [node name="Label_amplitude" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=573658800]
 layout_mode = 2
@@ -137,6 +155,30 @@ max_value = 2.0
 step = 0.001
 value = 0.025
 
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1830704584]
+layout_mode = 2
+
+[node name="ColorPickerButton_Primary" type="ColorPickerButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1756019068]
+layout_mode = 2
+text = "Primary Color"
+color = Color(0.8132577, 0.8132577, 0.81325763, 1)
+
+[node name="Label2" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=296533997]
+layout_mode = 2
+
+[node name="ColorPickerButton_Secondary" type="ColorPickerButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1629369328]
+layout_mode = 2
+text = "Primary Color"
+color = Color(0.8132577, 0.8132577, 0.81325763, 1)
+
+[node name="Label3" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=508689577]
+layout_mode = 2
+
+[node name="ColorPickerButton_highlight" type="ColorPickerButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1276934326]
+layout_mode = 2
+text = "Primary Color"
+color = Color(0.8132577, 0.8132577, 0.81325763, 1)
+
 [node name="MarginContainer2" type="MarginContainer" parent="." unique_id=484870167]
 layout_mode = 1
 anchors_preset = 3
@@ -189,15 +231,20 @@ text = "void fragment() {
 }"
 
 [node name="Show_Code_CheckBox" type="CheckBox" parent="MarginContainer2/PanelContainer/MarginContainer/VBoxContainer" unique_id=1458290816]
+visible = false
 layout_mode = 2
 text = "Show Code"
 
 [connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/UVCheckBox" to="MarginContainer/PanelContainer" method="_on_uv_check_box_toggled"]
+[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/AddLogoCheckBox" to="." method="_on_add_logo_check_box_toggled"]
 [connection signal="value_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HSlider_amplitude" to="MarginContainer/PanelContainer" method="_on_h_slider_amplitude_value_changed"]
 [connection signal="value_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HSlider_wavelength" to="MarginContainer/PanelContainer" method="_on_h_slider_wavelength_value_changed"]
 [connection signal="value_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HSlider_speed" to="MarginContainer/PanelContainer" method="_on_h_slider_speed_value_changed"]
 [connection signal="value_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HSlider_x_offset" to="MarginContainer/PanelContainer" method="_on_h_slider_x_offset_value_changed"]
 [connection signal="value_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HSlider_y_offset" to="MarginContainer/PanelContainer" method="_on_h_slider_y_offset_value_changed"]
 [connection signal="value_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HSlider_wave_size" to="MarginContainer/PanelContainer" method="_on_h_slider_wave_size_value_changed"]
+[connection signal="color_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ColorPickerButton_Primary" to="MarginContainer/PanelContainer" method="_on_color_picker_button_primary_color_changed"]
+[connection signal="color_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ColorPickerButton_Secondary" to="MarginContainer/PanelContainer" method="_on_color_picker_button_secondary_color_changed"]
+[connection signal="color_changed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ColorPickerButton_highlight" to="MarginContainer/PanelContainer" method="_on_color_picker_button_highlight_color_changed"]
 [connection signal="toggled" from="MarginContainer2/PanelContainer/MarginContainer/VBoxContainer/Show_Code_CheckBox" to="." method="_on_show_code_check_box_toggled"]

@@ -37,15 +37,15 @@ rendering_device/driver.windows="d3d12"
 
 primary_color={
 "type": "color",
-"value": Color(0.4331607, 0.74233973, 1, 1)
+"value": Color(0.43137255, 0.7411765, 1, 1)
 }
 secondary_color={
 "type": "color",
-"value": Color(0.6986348, 0.8525161, 0.9412011, 1)
+"value": Color(0.92156863, 0.7764706, 0.8627451, 1)
 }
 highlight_color={
 "type": "color",
-"value": Color(1, 1, 1, 1)
+"value": Color(0, 0, 0, 1)
 }
 use_uv_color={
 "type": "bool",
