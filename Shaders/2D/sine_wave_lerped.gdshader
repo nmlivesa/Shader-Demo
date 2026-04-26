@@ -25,7 +25,7 @@ void vertex() {
 
 void fragment() {
 	float time = TIME;
-	vec4 screen_color = textureLod(screen_texture, SCREEN_UV, 0.0);
+	vec4 screen_color = texture(screen_texture, SCREEN_UV, 0.0);
 	vec2 uv = UV;
 	float wave_height = sin(uv.x * (2.0 / wavelength) + time * speed) * amplitude  + 0.5 + y_offset;
 	if (uv.y > wave_height) {

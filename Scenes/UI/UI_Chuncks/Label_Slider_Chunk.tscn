@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dhb6avs7tktji"]
+
+[ext_resource type="Script" uid="uid://c1g3sh6e52ysn" path="res://Scenes/UI/UI_Chuncks/label_slider_chunk.gd" id="1_vcu5g"]
+
+[node name="LabelSliderChunk" type="Control" unique_id=1972262158]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_vcu5g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=276338910]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1308198502]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer" unique_id=302736262]
+layout_mode = 2
+
+[connection signal="value_changed" from="VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]

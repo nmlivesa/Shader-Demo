@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bmk660qotvs3i"]
+
+[ext_resource type="Shader" uid="uid://brpf44b1ar66n" path="res://Shaders/Screen_Space/mix_with_noise.gdshader" id="1_qbkq6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o4471"]
+shader = ExtResource("1_qbkq6")
+shader_parameter/mix_color = Color(0, 0, 0, 0)
+shader_parameter/random_multiplier = 0.01
+shader_parameter/mix_baseline = 0.0
+shader_parameter/noise_step = 0.002
+
+[node name="Mix_With_Noise" type="ColorRect" unique_id=1175847592]
+material = SubResource("ShaderMaterial_o4471")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

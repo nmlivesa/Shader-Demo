@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://3igxxpfc75a7"]
+
+[ext_resource type="Script" uid="uid://cy0ufrbrub3it" path="res://Scenes/UI/UI_Chonks/ui_mix_with_noise.gd" id="1_pve6c"]
+[ext_resource type="PackedScene" uid="uid://dhb6avs7tktji" path="res://Scenes/UI/UI_Chuncks/Label_Slider_Chunk.tscn" id="1_t1u5a"]
+
+[node name="UiMixWithNoise" type="Control" unique_id=1990314982]
+custom_minimum_size = Vector2(200, 250)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 250.0
+script = ExtResource("1_pve6c")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=278426729]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1646433629]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer" unique_id=914412618]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/VBoxContainer" unique_id=253216325]
+layout_mode = 2
+text = "Mix Color"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer/VBoxContainer/VBoxContainer" unique_id=732972338]
+layout_mode = 2
+text = "mix"
+
+[node name="LabelSliderChunk_noise_step" parent="VBoxContainer/VBoxContainer" unique_id=1972262158 instance=ExtResource("1_t1u5a")]
+layout_mode = 2
+variable_name = "noise_step"
+variable_display_name = "noise size"
+slider_min = 0.001
+slider_max = 0.01
+slider_start = 0.002
+slider_step = 0.001
+
+[node name="LabelSliderChunk_mix_baseline" parent="VBoxContainer/VBoxContainer" unique_id=34285721 instance=ExtResource("1_t1u5a")]
+layout_mode = 2
+variable_name = "mix_baseline"
+variable_display_name = "Mix Baseline"
+slider_min = -2.0
+slider_max = 2.0
+slider_step = 0.01
+
+[node name="CheckBox_noise" type="CheckBox" parent="VBoxContainer/VBoxContainer" unique_id=1649869709]
+layout_mode = 2
+button_pressed = true
+text = "Add Noise"
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer" unique_id=1559492409]
+layout_mode = 2
+text = "Mix With Noise"
+
+[connection signal="color_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="new_value" from="VBoxContainer/VBoxContainer/LabelSliderChunk_noise_step" to="." method="_on_noise_step_new_value"]
+[connection signal="new_value" from="VBoxContainer/VBoxContainer/LabelSliderChunk_mix_baseline" to="." method="_on_mix_baseline_new_value"]
+[connection signal="toggled" from="VBoxContainer/VBoxContainer/CheckBox_noise" to="." method="_on_check_box_noise_toggled"]
+[connection signal="toggled" from="VBoxContainer/CheckBox" to="." method="_on_check_box_toggled"]
