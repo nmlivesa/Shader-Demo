@@ -65,7 +65,7 @@ Values between -0.5 and -1.0 for best results"
 [node name="OptionButton" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1782759601]
 layout_mode = 2
 selected = 0
-item_count = 7
+item_count = 8
 popup/item_0/text = "Base Wave"
 popup/item_0/id = 0
 popup/item_1/text = "Logo Wave (Swizzle)"
@@ -78,8 +78,10 @@ popup/item_4/text = "Swizzle Duplicate"
 popup/item_4/id = 3
 popup/item_5/text = "Wave Lerped"
 popup/item_5/id = 6
-popup/item_6/text = "Vertex Wave"
-popup/item_6/id = 2
+popup/item_6/text = "Voronoi"
+popup/item_6/id = 7
+popup/item_7/text = "Vertex Wave"
+popup/item_7/id = 2
 
 [node name="UVCheckBox" type="CheckBox" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=979650838]
 layout_mode = 2

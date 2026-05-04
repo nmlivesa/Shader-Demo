@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dq32rvqbbcps0"]
+
+[ext_resource type="Shader" uid="uid://dhvwkntsetpms" path="res://Scenes/2D_Shaders/translate_circular.gdshader" id="1_2de4o"]
+[ext_resource type="Texture2D" uid="uid://b78ln46at8xgw" path="res://VGDC_Logo.png" id="2_igsl6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qd2bp"]
+shader = ExtResource("1_2de4o")
+
+[node name="Translate_Circular" type="TextureRect" unique_id=1048721796]
+material = SubResource("ShaderMaterial_qd2bp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_igsl6")
+expand_mode = 1

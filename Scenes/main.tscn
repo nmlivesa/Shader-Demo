@@ -10,12 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://bdfjipn65ltk0" path="res://Scenes/2D_Shaders/sine_wave.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://bsolntuw8rlfx" path="res://Scenes/2D_Shaders/wave_logo.tscn" id="6_6bp64"]
 [ext_resource type="PackedScene" uid="uid://bpnkwvpgx56lj" path="res://Scenes/2D_Shaders/sine_wave_lerped.tscn" id="7_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://ckaa8km4degk3" path="res://Scenes/2D_Shaders/voronoi_wave.tscn" id="9_6iyac"]
 [ext_resource type="PackedScene" uid="uid://bmk660qotvs3i" path="res://Scenes/Screen_Space/mix_with_noise.tscn" id="9_hptm8"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jjvhh"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d1ilt"]
 
 [sub_resource type="Sky" id="Sky_kry3j"]
-sky_material = SubResource("ProceduralSkyMaterial_jjvhh")
+sky_material = SubResource("ProceduralSkyMaterial_d1ilt")
 
 [sub_resource type="Environment" id="Environment_21xkr"]
 background_mode = 2
@@ -25,13 +26,14 @@ sky = SubResource("Sky_kry3j")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1189186146]
 
-[node name="UI" parent="CanvasLayer" unique_id=1887882613 node_paths=PackedStringArray("base_wave", "wave_logo", "swizzle_wave", "swizzle_center_weighted", "swizzle_duplicate", "wave_lerped", "plane_wave", "view3d") instance=ExtResource("1_jjgbg")]
+[node name="UI" parent="CanvasLayer" unique_id=1887882613 node_paths=PackedStringArray("base_wave", "wave_logo", "swizzle_wave", "swizzle_center_weighted", "swizzle_duplicate", "wave_lerped", "voronoi_wave", "plane_wave", "view3d") instance=ExtResource("1_jjgbg")]
 base_wave = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport/WaveVisualized")
 wave_logo = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport/Wave_Logo")
 swizzle_wave = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport/swizzle_wave")
 swizzle_center_weighted = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport/Swizzle_Center_weighted")
 swizzle_duplicate = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport/Swizzle_Duplicate")
 wave_lerped = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport/sine_wave_lerped")
+voronoi_wave = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport/Voronoi_Wave")
 plane_wave = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport/SubViewportContainer/SubViewport/plane_wave")
 view3d = NodePath("../../CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport/SubViewportContainer")
 
@@ -128,6 +130,9 @@ visible = false
 visible = false
 
 [node name="sine_wave_lerped" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport" unique_id=1917794210 instance=ExtResource("7_ynf5e")]
+visible = false
+
+[node name="Voronoi_Wave" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport" unique_id=1347011783 instance=ExtResource("9_6iyac")]
 visible = false
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer2/Control/PanelContainer/MarginContainer/PanelContainer/SubViewportContainer/SubViewport" unique_id=782579364]

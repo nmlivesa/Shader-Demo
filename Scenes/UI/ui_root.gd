@@ -6,13 +6,14 @@ extends Control
 @export var swizzle_center_weighted : Control
 @export var swizzle_duplicate : Control
 @export var wave_lerped : Control
+@export var voronoi_wave : ColorRect
 @export var add_logo : CheckBox
 @export var wave_lerped_label : Label
 @export var plane_wave : Control
 @export var view3d : SubViewportContainer
 @export var code_label : RichTextLabel
 
-var index3d : int = 6
+var index3d : int = 7
 var current_shown
 var shader_array : Array[Control]
 var code_text_array : Array[String]
@@ -45,6 +46,7 @@ func _ready() -> void:
 	shader_array.append(swizzle_center_weighted)
 	shader_array.append(swizzle_duplicate)
 	shader_array.append(wave_lerped)
+	shader_array.append(voronoi_wave)
 	shader_array.append(plane_wave)
 	current_shown = shader_array.get(0)
 

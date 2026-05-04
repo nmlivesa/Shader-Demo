@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cvxtt036bp71u"]
+
+[ext_resource type="Shader" uid="uid://bhb6cisxiqj4u" path="res://Scenes/Flow_Fields/Flow_Field.gdshader" id="1_k0j5f"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0h0qu"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fkjv7"]
+noise = SubResource("FastNoiseLite_0h0qu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_27nb2"]
+shader = ExtResource("1_k0j5f")
+shader_parameter/color_line = Color(1, 1, 1, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_fkjv7")
+
+[node name="FlowField" type="Control" unique_id=1450751194]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1809737505]
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1681126420]
+custom_minimum_size = Vector2(1080, 1080)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer" unique_id=897685140]
+material = SubResource("ShaderMaterial_27nb2")
+layout_mode = 2

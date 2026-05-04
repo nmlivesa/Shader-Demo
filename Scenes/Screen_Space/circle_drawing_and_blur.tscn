@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://dos8u42s1osh7"]
+
+[ext_resource type="Shader" uid="uid://d3gr42jqjdf2b" path="res://Scenes/Screen_Space/circle_particles.gdshader" id="1_74p7q"]
+[ext_resource type="Shader" uid="uid://he2na2a3j83u" path="res://Scenes/Screen_Space/Fade_To.gdshader" id="2_o4ous"]
+[ext_resource type="Shader" uid="uid://u4tumsneo8ee" path="res://Scenes/Screen_Space/circle_drawing_variable.gdshader" id="3_dx0dw"]
+[ext_resource type="Shader" uid="uid://7fwc5qrcjnt8" path="res://Shaders/Screen_Space/circle_drawing.gdshader" id="4_fgr0d"]
+[ext_resource type="Shader" uid="uid://je7siqqctw61" path="res://Scenes/Screen_Space/circle_drawing_loop.gdshader" id="5_hdymt"]
+[ext_resource type="Shader" uid="uid://exkaccjf3g77" path="res://Scenes/Screen_Space/blur.gdshader" id="6_edk3t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8qa4"]
+shader = ExtResource("1_74p7q")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8yhhf"]
+shader = ExtResource("2_o4ous")
+shader_parameter/fade_factor = 0.02
+shader_parameter/targetColor = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cwuxl"]
+shader = ExtResource("3_dx0dw")
+shader_parameter/drawColor = Color(1, 1, 1, 1)
+shader_parameter/margin = 0.002
+shader_parameter/speed1 = 1.0
+shader_parameter/speed2 = 1.0
+shader_parameter/speed3 = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k5al8"]
+shader = ExtResource("4_fgr0d")
+shader_parameter/drawColor = Color(1, 1, 1, 1)
+shader_parameter/margin = 0.002
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hq651"]
+shader = ExtResource("6_edk3t")
+shader_parameter/blur_amount = 0.3510001116725001
+shader_parameter/mix_amount = 0.0
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5etwf"]
+shader = ExtResource("5_hdymt")
+shader_parameter/drawColor = Color(0.52942955, 0.71246064, 0.697673, 0.3137255)
+shader_parameter/num_points = 6
+shader_parameter/display_points_above = 1
+shader_parameter/margin = 0.002
+shader_parameter/speed_base = 1.0
+shader_parameter/speed_mult = 1.05
+shader_parameter/radius_base = 1.0
+shader_parameter/radius_mult = 1.25
+shader_parameter/lineColor = Color(1, 1, 1, 0.105882354)
+shader_parameter/line_size = 1.0
+
+[node name="Circle_Drawing_and_Blur" type="Control" unique_id=749182634]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1150245556]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -540.0
+offset_right = 540.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=140960948]
+handle_input_locally = false
+size = Vector2i(1080, 1080)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="SubViewportContainer/SubViewport" unique_id=1466053072]
+visible = false
+process_material = SubResource("ShaderMaterial_g8qa4")
+
+[node name="Fade_to" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=1891184036]
+visible = false
+material = SubResource("ShaderMaterial_8yhhf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="SubViewportContainer/SubViewport" unique_id=1619505640]
+copy_mode = 2
+
+[node name="Draw_Pattern" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=505448902]
+visible = false
+material = SubResource("ShaderMaterial_cwuxl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Circle_Drawing" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=75068542]
+visible = false
+material = SubResource("ShaderMaterial_k5al8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Blur" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=1213299664]
+material = SubResource("ShaderMaterial_hq651")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="BackBufferCopy2" type="BackBufferCopy" parent="SubViewportContainer/SubViewport" unique_id=1537412930]
+copy_mode = 2
+
+[node name="Circle_Drawing_Loop" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=1954320029]
+material = SubResource("ShaderMaterial_5etwf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)

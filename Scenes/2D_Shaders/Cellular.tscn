@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bc7q70iv7g1go"]
+
+[ext_resource type="Shader" uid="uid://bpjyb5xofrant" path="res://Shaders/2D/Cellular.gdshader" id="1_fcbb8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fve5"]
+shader = ExtResource("1_fcbb8")
+shader_parameter/column = 15.0
+shader_parameter/row = 10.0
+shader_parameter/min_distance = 0.0
+shader_parameter/color = Color(0.6539212, 0.8650602, 0.85717547, 1)
+
+[node name="Cellular" type="ColorRect" unique_id=1431696079]
+material = SubResource("ShaderMaterial_3fve5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

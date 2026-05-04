@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://ckaa8km4degk3"]
+
+[ext_resource type="Shader" uid="uid://bpds07crg5ert" path="res://Shaders/2D/Voronoi_Wave.gdshader" id="1_p173r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_03kdo"]
+shader = ExtResource("1_p173r")
+shader_parameter/column = 15.0
+shader_parameter/row = 10.0
+shader_parameter/min_distance = 0.01
+shader_parameter/color = Color(1, 1, 1, 1)
+
+[node name="Voronoi_Wave" type="ColorRect" unique_id=1347011783]
+material = SubResource("ShaderMaterial_03kdo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
