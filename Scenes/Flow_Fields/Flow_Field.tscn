@@ -1,29 +1,57 @@
 [gd_scene format=3 uid="uid://cvxtt036bp71u"]
 
+[ext_resource type="Script" uid="uid://broya8mtd6uxr" path="res://Scenes/Flow_Fields/flow_field.gd" id="1_5gcjl"]
 [ext_resource type="Shader" uid="uid://bhb6cisxiqj4u" path="res://Scenes/Flow_Fields/Flow_Field.gdshader" id="1_k0j5f"]
+[ext_resource type="Shader" uid="uid://b3g0o8l7csl4e" path="res://Scenes/Flow_Fields/draw_point.gdshader" id="2_l5kas"]
+[ext_resource type="Shader" uid="uid://exkaccjf3g77" path="res://Scenes/Screen_Space/blur.gdshader" id="4_iylin"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5gcjl"]
+shader = ExtResource("2_l5kas")
+shader_parameter/point_size = 1.0
+shader_parameter/point_color = Color(0, 0.635565, 0.75171596, 1)
+shader_parameter/background_color = Color(0, 0, 0, 0)
+shader_parameter/p1 = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0h0qu"]
+shader = ExtResource("4_iylin")
+shader_parameter/blur_amount = 0.06900009827749987
+shader_parameter/mix_amount = 0.005000003497380001
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_5gcjl"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0h0qu"]
-noise_type = 3
+offset = Vector3(-244.9, -142.86, 0)
+domain_warp_fractal_gain = 0.1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fkjv7"]
 noise = SubResource("FastNoiseLite_0h0qu")
+color_ramp = SubResource("Gradient_5gcjl")
+seamless_blend_skirt = 0.348
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_27nb2"]
 shader = ExtResource("1_k0j5f")
-shader_parameter/color_line = Color(1, 1, 1, 1)
+shader_parameter/color_line = Color(0.7792914, 0.7792914, 0.7792913, 1)
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_fkjv7")
 
-[node name="FlowField" type="Control" unique_id=1450751194]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iylin"]
+shader = ExtResource("4_iylin")
+shader_parameter/blur_amount = 2.6590002213024997
+shader_parameter/mix_amount = 0.0
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[node name="FlowField" type="Control" unique_id=1450751194 node_paths=PackedStringArray("particle_shader_node")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_5gcjl")
+particle_shader_node = NodePath("SubViewportContainer/SubViewport/Particle_Manager/Particle")
+particle_velocity = 1000.0
 
-[node name="SubViewport" type="SubViewport" parent="." unique_id=1809737505]
-
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1681126420]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1384773428]
 custom_minimum_size = Vector2(1080, 1080)
 layout_mode = 1
 anchors_preset = 8
@@ -31,13 +59,84 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -540.0
+offset_top = -540.0
+offset_right = 540.0
+offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="PanelContainer" unique_id=897685140]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=402601387]
+handle_input_locally = false
+size = Vector2i(1080, 1080)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="Particle_Manager" type="Control" parent="SubViewportContainer/SubViewport" unique_id=595616890]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Particle" type="ColorRect" parent="SubViewportContainer/SubViewport/Particle_Manager" unique_id=1301486864]
+material = SubResource("ShaderMaterial_5gcjl")
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1080.0
+
+[node name="Blur" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=2119842674]
+material = SubResource("ShaderMaterial_0h0qu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Flow_Field_Color" type="ColorRect" parent="." unique_id=897685140]
 material = SubResource("ShaderMaterial_27nb2")
-layout_mode = 2
+instance_shader_parameters/show_vectors = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -544.0
+offset_right = 540.0
+offset_bottom = 544.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1809737505]
+size = Vector2i(1080, 1080)
+render_target_update_mode = 4
+
+[node name="Flow_Field_Color" type="ColorRect" parent="SubViewport" unique_id=1165685792]
+material = SubResource("ShaderMaterial_27nb2")
+offset_right = 1080.0
+offset_bottom = 1088.0
+
+[node name="Blur2" type="ColorRect" parent="SubViewport" unique_id=365734495]
+material = SubResource("ShaderMaterial_iylin")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1681126420]
+visible = false
+custom_minimum_size = Vector2(1080, 1080)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -540.0
+offset_right = 540.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2

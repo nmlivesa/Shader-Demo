@@ -2,9 +2,10 @@ shader_type canvas_item;
 uniform vec4 drawColor : source_color = vec4(1.0);
 uniform int num_points = 1;
 uniform int display_points_above = 0;
-uniform float margin = 0.002;
+uniform float margin = 5.0;
 uniform float speed_base = 1.0;
 uniform float speed_mult = 1.0;
+uniform vec2 origin = vec2(0.5, 0.5);
 uniform float radius_base = 1.0;
 uniform float radius_mult = 1.0;
 uniform vec4 lineColor : source_color = vec4(1.0);
@@ -31,11 +32,11 @@ void fragment() {
 	vec2 uv = UV;
 	float time = TIME;
 	//vec2 circle = (vec2(cos(TIME * speed_base), sin(TIME * speed_base))) * 0.1 + 0.5;
-	vec2 center = vec2(0.5,0.5);
+	vec2 center = origin;
 	COLOR = vec4(0.0);
-	/*if (length(uv - center) < margin) {
+	if (length(uv - center) < margin * SCREEN_PIXEL_SIZE.x && 0 > display_points_above) {
 			COLOR = drawColor;
-	}*/
+	}
 	float speed = speed_base;
 	float radius = radius_base;
 	vec4 draw_color_multiplied = drawColor;
@@ -44,7 +45,7 @@ void fragment() {
 		if (line(center, loop_circle, line_size, uv) > 0.0 && i > display_points_above + 1) {
 			COLOR = lineColor;
 		}
-		if (length(uv - loop_circle) < margin && i > display_points_above) {
+		if (length(uv - loop_circle) < margin * SCREEN_PIXEL_SIZE.x && i > display_points_above) {
 			COLOR = draw_color_multiplied;
 		}
 		center = loop_circle;

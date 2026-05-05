@@ -31,17 +31,18 @@ shader_parameter/margin = 0.002
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hq651"]
 shader = ExtResource("6_edk3t")
 shader_parameter/blur_amount = 0.3510001116725001
-shader_parameter/mix_amount = 0.0
+shader_parameter/mix_amount = 0.08200000715487998
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5etwf"]
 shader = ExtResource("5_hdymt")
 shader_parameter/drawColor = Color(0.52942955, 0.71246064, 0.697673, 0.3137255)
 shader_parameter/num_points = 6
-shader_parameter/display_points_above = 1
-shader_parameter/margin = 0.002
+shader_parameter/display_points_above = 0
+shader_parameter/margin = 5.0
 shader_parameter/speed_base = 1.0
-shader_parameter/speed_mult = 1.05
+shader_parameter/speed_mult = 1.0
+shader_parameter/origin = Vector2(0.5, 0.5)
 shader_parameter/radius_base = 1.0
 shader_parameter/radius_mult = 1.25
 shader_parameter/lineColor = Color(1, 1, 1, 0.105882354)
