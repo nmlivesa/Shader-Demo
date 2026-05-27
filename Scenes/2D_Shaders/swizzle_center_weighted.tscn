@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c8ox7od13vw6o"]
 
-[ext_resource type="Shader" uid="uid://bwo7nyfetumxe" path="res://Shaders/2D/Swizzle_Center_Weighted.gdshader" id="1_wc6hc"]
-[ext_resource type="Texture2D" uid="uid://b78ln46at8xgw" path="res://VGDC_Logo.png" id="2_wc6hc"]
+[ext_resource type="Shader" uid="uid://bwo7nyfetumxe" path="res://Shaders/2D_Pattern/Swizzle_Center_Weighted.gdshader" id="1_wc6hc"]
+[ext_resource type="Texture2D" uid="uid://b78ln46at8xgw" path="res://Assets/VGDC_Logo.png" id="2_wc6hc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_368fq"]
 shader = ExtResource("1_wc6hc")

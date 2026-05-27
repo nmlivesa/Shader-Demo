@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bdfjipn65ltk0"]
 
-[ext_resource type="Shader" uid="uid://bcohsm13kyk3s" path="res://Shaders/2D/sine_wave.gdshader" id="1_e1ubq"]
+[ext_resource type="Shader" uid="uid://bcohsm13kyk3s" path="res://Shaders/2D_Pattern/sine_wave.gdshader" id="1_e1ubq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xfk4s"]
 shader = ExtResource("1_e1ubq")

@@ -26,9 +26,9 @@ vec4 draw_direction(vec2 uv, float grid_size, vec2 pixel_size) {
 	//direction /= (grid_size * 3.0);
 	//vec2 direction = vec2(1.0, 1.0);
 	index_uv += 0.5 / grid_size;
-	float on_line = line(index_uv , index_uv + (direction) / (grid_size * 2.0),  pixel_size.x * 1.0, uv);
-	on_line += float(length(uv - index_uv) < pixel_size.x * 4.0); 
-	return color_line * on_line;
+	float on_line = line(index_uv , index_uv + (direction) / (grid_size * 2.5),  pixel_size.x * 1.0, uv);
+	float in_circle = float(length(uv - index_uv) < pixel_size.x * 2.0) * (1.0 - on_line); 
+	return color_line * on_line * 2.0 + color_line * in_circle;
 }
 
 void vertex() {

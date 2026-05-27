@@ -1,0 +1,236 @@
+[gd_scene format=3 uid="uid://d1xxg3kpxw5ea"]
+
+[ext_resource type="Shader" uid="uid://d2iluvhvli0bs" path="res://Scenes/Particles_3D/Vector_Field_Visual.gdshader" id="1_3xbce"]
+[ext_resource type="Shader" uid="uid://exkaccjf3g77" path="res://Shaders/Screen_Space/blur.gdshader" id="1_ouug6"]
+[ext_resource type="Shader" uid="uid://c5gv0koc1hi0u" path="res://Scenes/Particles_3D/particles_3d.gdshader" id="2_3xbce"]
+[ext_resource type="PackedScene" uid="uid://bi5vbh6pwihff" path="res://Prefabs/ParticleSpawner/ParticleSpawner.tscn" id="4_va33a"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3xaex"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_ouug6"]
+sky_material = SubResource("ProceduralSkyMaterial_3xaex")
+
+[sub_resource type="Environment" id="Environment_3xbce"]
+background_mode = 3
+sky = SubResource("Sky_ouug6")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xaex"]
+transparency = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ouug6"]
+shader = ExtResource("1_3xbce")
+shader_parameter/dimensions = Vector3(5, 5, 5)
+shader_parameter/point_count = 10.0
+shader_parameter/attractor_mult = 0.25
+shader_parameter/wrap_radius = 20.0
+shader_parameter/wrap_mult = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_3xbce"]
+size = Vector3(0.05, 0.05, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xbce"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_va33a"]
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gl3vx"]
+top_radius = 0.0
+bottom_radius = 0.05
+height = 0.15
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_va33a"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_va33a"]
+shader = ExtResource("2_3xbce")
+shader_parameter/attractor_mult = 1.0
+shader_parameter/start_position = Vector3(1, 0, 1)
+shader_parameter/start_position_offset = Vector3(0, 0, 0)
+shader_parameter/initial_velocity = Vector3(0, 0, 0)
+shader_parameter/initial_velocity_range = Vector3(0, 0, 0)
+shader_parameter/max_speed = 1.0
+shader_parameter/wrap_radius = 20.0
+shader_parameter/wrap_mult = 0.95
+
+[sub_resource type="BoxMesh" id="BoxMesh_va33a"]
+size = Vector3(0.025, 0.025, 0.025)
+
+[sub_resource type="Gradient" id="Gradient_3xbce"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0.13780919, 0.38515902, 0.7526502, 0.8798587, 0.975265, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.52156866, 0.52156866, 0.40392157, 1, 0.5019608, 0.5019608, 0.5019608, 1, 0, 1, 1, 1, 0.34901962, 1, 0.69803923, 1, 0.5176471, 0.63529414, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3xbce"]
+noise_type = 2
+seed = 1
+frequency = 0.0296
+fractal_type = 2
+fractal_octaves = 2
+domain_warp_type = 2
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_va33a"]
+width = 128
+height = 128
+depth = 128
+noise = SubResource("FastNoiseLite_3xbce")
+color_ramp = SubResource("Gradient_3xbce")
+
+[sub_resource type="Gradient" id="Gradient_va33a"]
+offsets = PackedFloat32Array(0, 0.44674557, 1)
+colors = PackedColorArray(0.44313726, 1, 0, 1, 0.47058824, 0.5254902, 1, 1, 1, 0.24705882, 0.1882353, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l14n5"]
+noise_type = 3
+offset = Vector3(15.2, 0, 0)
+fractal_type = 0
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_gl3vx"]
+noise = SubResource("FastNoiseLite_l14n5")
+color_ramp = SubResource("Gradient_va33a")
+
+[sub_resource type="Gradient" id="Gradient_l14n5"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0.00591716, 0.44674557, 0.57988167, 0.71005917, 1)
+colors = PackedColorArray(0.042850327, 0.902439, 0, 1, 0.605833, 0.7572885, 0.54603696, 1, 0, 0.6156863, 0.7372549, 1, 0.9054676, 0.41349977, 0.8998331, 1, 0.9764706, 0.12941177, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_va33a"]
+noise_type = 2
+frequency = 0.0441
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_l14n5"]
+noise = SubResource("FastNoiseLite_va33a")
+color_ramp = SubResource("Gradient_l14n5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l14n5"]
+shader = ExtResource("1_ouug6")
+shader_parameter/blur_amount = 2.0390001918525
+shader_parameter/mix_amount = 0.5
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3xbce"]
+shader = ExtResource("1_ouug6")
+shader_parameter/blur_amount = 0.0
+shader_parameter/mix_amount = -0.5
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[node name="Particles3D" type="Control" unique_id=1228485192]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=365782258]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=59983294]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport" unique_id=1922945406]
+environment = SubResource("Environment_3xbce")
+
+[node name="GPUParticles3D_Show_Forces" type="GPUParticles3D" parent="SubViewportContainer/SubViewport" unique_id=887179328]
+visible = false
+material_override = SubResource("StandardMaterial3D_3xaex")
+amount = 1000
+lifetime = 14.4
+explosiveness = 1.0
+process_material = SubResource("ShaderMaterial_ouug6")
+draw_pass_1 = SubResource("BoxMesh_3xbce")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="SubViewportContainer/SubViewport" unique_id=864331386]
+visible = false
+material_override = SubResource("StandardMaterial3D_3xbce")
+lifetime = 15.0
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_va33a")
+draw_pass_1 = SubResource("CylinderMesh_gl3vx")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="SubViewportContainer/SubViewport" unique_id=1260522850]
+visible = false
+material_override = SubResource("StandardMaterial3D_va33a")
+amount = 1000
+lifetime = 115.54
+process_material = SubResource("ShaderMaterial_va33a")
+draw_pass_1 = SubResource("BoxMesh_va33a")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=1903540697]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" unique_id=1821902932]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.8660254, 0.49999994, 0, -0.5, 0.86602527, 0, 0, 0)
+
+[node name="Attractors" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1169662743]
+
+[node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="SubViewportContainer/SubViewport/Attractors" unique_id=2077073256]
+attenuation = 3.8637445
+size = Vector3(30, 30, 30)
+
+[node name="GPUParticlesAttractorVectorField3D" type="GPUParticlesAttractorVectorField3D" parent="SubViewportContainer/SubViewport/Attractors" unique_id=587771265]
+visible = false
+size = Vector3(10, 10, 10)
+texture = SubResource("NoiseTexture3D_va33a")
+
+[node name="GoodMixtureGPUParticlesAttractorVectorField3D2" type="GPUParticlesAttractorVectorField3D" parent="SubViewportContainer/SubViewport/Attractors" unique_id=117102275]
+visible = false
+strength = 2.98
+size = Vector3(8, 8, 8)
+texture = SubResource("NoiseTexture3D_gl3vx")
+
+[node name="BigGPUParticlesAttractorVectorField3D" type="GPUParticlesAttractorVectorField3D" parent="SubViewportContainer/SubViewport/Attractors" unique_id=2005399133]
+visible = false
+size = Vector3(10, 10, 10)
+texture = SubResource("NoiseTexture3D_l14n5")
+
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="SubViewportContainer/SubViewport/Attractors" unique_id=636130672]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
+visible = false
+radius = 10.0
+
+[node name="GPUParticlesAttractorSphere3D2" type="GPUParticlesAttractorSphere3D" parent="SubViewportContainer/SubViewport/Attractors" unique_id=1966578554]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522, 1.156, -0.19)
+visible = false
+strength = -45.14
+radius = 1.3040063
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=1183304134]
+material = SubResource("ShaderMaterial_l14n5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ParticleSpawner" parent="SubViewportContainer/SubViewport" unique_id=1846885887 instance=ExtResource("4_va33a")]
+particle_type = "glowsticks"
+particle_node_folder = "res://Prefabs/Particles"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=818382285]
+visible = false
+material = SubResource("ShaderMaterial_3xbce")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)

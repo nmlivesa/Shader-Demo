@@ -1,21 +1,21 @@
 [gd_scene format=3 uid="uid://cvxtt036bp71u"]
 
-[ext_resource type="Script" uid="uid://broya8mtd6uxr" path="res://Scenes/Flow_Fields/flow_field.gd" id="1_5gcjl"]
-[ext_resource type="Shader" uid="uid://bhb6cisxiqj4u" path="res://Scenes/Flow_Fields/Flow_Field.gdshader" id="1_k0j5f"]
-[ext_resource type="Shader" uid="uid://b3g0o8l7csl4e" path="res://Scenes/Flow_Fields/draw_point.gdshader" id="2_l5kas"]
-[ext_resource type="Shader" uid="uid://exkaccjf3g77" path="res://Scenes/Screen_Space/blur.gdshader" id="4_iylin"]
+[ext_resource type="Script" uid="uid://broya8mtd6uxr" path="res://Scenes/Flow_Fields/Flow_Field_Test/flow_field_test.gd" id="1_7p5ha"]
+[ext_resource type="Shader" uid="uid://b3g0o8l7csl4e" path="res://Shaders/2D_Shapes/draw_point.gdshader" id="2_vbrev"]
+[ext_resource type="Shader" uid="uid://exkaccjf3g77" path="res://Shaders/Screen_Space/blur.gdshader" id="3_4f6o7"]
+[ext_resource type="Shader" uid="uid://bhb6cisxiqj4u" path="res://Scenes/Flow_Fields/Flow_Field_Test/Flow_Field_Test.gdshader" id="4_3dafl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5gcjl"]
-shader = ExtResource("2_l5kas")
+shader = ExtResource("2_vbrev")
 shader_parameter/point_size = 1.0
 shader_parameter/point_color = Color(0, 0.635565, 0.75171596, 1)
 shader_parameter/background_color = Color(0, 0, 0, 0)
 shader_parameter/p1 = Vector2(0.5, 0.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0h0qu"]
-shader = ExtResource("4_iylin")
+shader = ExtResource("3_4f6o7")
 shader_parameter/blur_amount = 0.06900009827749987
-shader_parameter/mix_amount = 0.005000003497380001
+shader_parameter/mix_amount = 0.00500000349738
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [sub_resource type="Gradient" id="Gradient_5gcjl"]
@@ -30,12 +30,13 @@ color_ramp = SubResource("Gradient_5gcjl")
 seamless_blend_skirt = 0.348
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_27nb2"]
-shader = ExtResource("1_k0j5f")
+shader = ExtResource("4_3dafl")
+shader_parameter/grid = 10.0
 shader_parameter/color_line = Color(0.7792914, 0.7792914, 0.7792913, 1)
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_fkjv7")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iylin"]
-shader = ExtResource("4_iylin")
+shader = ExtResource("3_4f6o7")
 shader_parameter/blur_amount = 2.6590002213024997
 shader_parameter/mix_amount = 0.0
 shader_parameter/color_over = Color(0, 0, 0, 1)
@@ -47,7 +48,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_5gcjl")
+script = ExtResource("1_7p5ha")
 particle_shader_node = NodePath("SubViewportContainer/SubViewport/Particle_Manager/Particle")
 particle_velocity = 1000.0
 

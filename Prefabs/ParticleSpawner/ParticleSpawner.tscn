@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bi5vbh6pwihff"]
+
+[ext_resource type="Script" uid="uid://crw62pb831vsh" path="res://Prefabs/ParticleSpawner/particle_spawner.gd" id="1_g1ytj"]
+
+[node name="ParticleManager" type="Node3D" unique_id=1846885887]
+script = ExtResource("1_g1ytj")

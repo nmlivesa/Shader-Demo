@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dq32rvqbbcps0"]
 
 [ext_resource type="Shader" uid="uid://dhvwkntsetpms" path="res://Scenes/2D_Shaders/translate_circular.gdshader" id="1_2de4o"]
-[ext_resource type="Texture2D" uid="uid://b78ln46at8xgw" path="res://VGDC_Logo.png" id="2_igsl6"]
+[ext_resource type="Texture2D" uid="uid://b78ln46at8xgw" path="res://Assets/VGDC_Logo.png" id="2_igsl6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qd2bp"]
 shader = ExtResource("1_2de4o")

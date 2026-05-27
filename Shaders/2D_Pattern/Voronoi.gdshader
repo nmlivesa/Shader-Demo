@@ -1,7 +1,9 @@
 shader_type canvas_item;
+
 uniform float column = 15.0;
 uniform float row = 10.0;
 uniform float min_distance = 0.01;
+uniform float amplitude = 1.0;
 uniform vec4 color : source_color = vec4(1.0);
 
 vec2 random(vec2 uv) {
@@ -26,7 +28,7 @@ vec2 voronoi(vec2 uv, float columns, float rows) {
 			vec2 neighbor = vec2(float(x),float(y));
 			vec2 point = random(index_uv + neighbor);
 			
-			point = 0.5 + 0.5 * sin(TIME + 6.2831 * point);
+			point = 0.5 + 0.5 * sin(TIME + 6.2831 * point) * amplitude;
 			
 			vec2 diff = neighbor + point - fract_uv;
 			float dist = length(diff);
@@ -37,15 +39,14 @@ vec2 voronoi(vec2 uv, float columns, float rows) {
 			}
 		}
 	}
-	return vec2(minimum_dist + 1.0 - step(min_distance, minimum_dist)); //minimum_point + 1. - step(min_distance, minimum_dist);
+	return minimum_point + 1. - step(min_distance, minimum_dist);
 }// minimum_point *0.0 + minimum_dist + 1.0 - step(min_distance, minimum_dist); // decent cellular
 
 void fragment() {
-	vec3 voronoi_color = vec3( color.xyz * voronoi(UV, column, row).r);
-	COLOR = vec4(voronoi_color, 1.0);
-	//float voronoi = voronoi(UV, column, row).r;
-	//COLOR = mix(color, vec4(0.0), voronoi);
+	float voronoi = voronoi(UV, column, row).r;
+	COLOR = vec4((color * voronoi).xyz, 1.0);
 }
+
 //void light() {
 //	// Called for every pixel for every light affecting the CanvasItem.
 //	// Uncomment to replace the default light processing function with this one.

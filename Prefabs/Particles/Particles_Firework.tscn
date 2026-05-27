@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://ddhunu4682gli"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p7gw7"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="Gradient" id="Gradient_gr6cv"]
+colors = PackedColorArray(0, 0.58669317, 0.94908243, 1, 0.7308645, 0.15029636, 0.07523591, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x2io5"]
+gradient = SubResource("Gradient_gr6cv")
+
+[sub_resource type="Curve" id="Curve_bsatq"]
+_limits = [0.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 98.076935), 0.0, 118.51523, 0, 0, Vector2(1, 200), 11.812348, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_aos87"]
+curve = SubResource("Curve_bsatq")
+
+[sub_resource type="Curve" id="Curve_faom8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7396227, 1), 0.0, 0.0, 0, 0, Vector2(0.99622643, 0.3438486), -5.252639, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_p0ltx"]
+curve = SubResource("Curve_faom8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wf1fi"]
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 3.5
+initial_velocity_max = 5.0
+gravity = Vector3(0, -2.45, 0)
+scale_curve = SubResource("CurveTexture_p0ltx")
+color_initial_ramp = SubResource("GradientTexture1D_x2io5")
+emission_curve = SubResource("CurveTexture_aos87")
+
+[sub_resource type="QuadMesh" id="QuadMesh_smq4r"]
+size = Vector2(0.05, 0.05)
+
+[node name="ParitclesFirework" type="GPUParticles3D" unique_id=364324857]
+material_override = SubResource("StandardMaterial3D_p7gw7")
+amount = 64
+lifetime = 5.0
+explosiveness = 1.0
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_wf1fi")
+draw_pass_1 = SubResource("QuadMesh_smq4r")

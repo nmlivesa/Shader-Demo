@@ -1,0 +1,264 @@
+[gd_scene format=3 uid="uid://c8lu6pwnnoftr"]
+
+[ext_resource type="Shader" uid="uid://b3g0o8l7csl4e" path="res://Shaders/2D_Shapes/draw_point.gdshader" id="1_4inph"]
+[ext_resource type="Shader" uid="uid://r4xbr660oy43" path="res://Scenes/Flow_Fields/Particle_Flow_V2/Particle_Flow_V2_Visualizer.gdshader" id="1_sif7m"]
+[ext_resource type="Shader" uid="uid://dx8hgna5gjetk" path="res://Scenes/Flow_Fields/Particle_Flow_V2/Particle_Flow_V2.gdshader" id="2_xumqa"]
+[ext_resource type="Shader" uid="uid://exkaccjf3g77" path="res://Shaders/Screen_Space/blur.gdshader" id="3_sif7m"]
+[ext_resource type="Shader" uid="uid://bpjyb5xofrant" path="res://Shaders/2D_Pattern/Cellular.gdshader" id="4_xumqa"]
+[ext_resource type="Texture2D" uid="uid://bcq60cfn8amv" path="res://Assets/storm-clouds-AB001658-57e087833df78c9ccef72cc1.jpg" id="7_c8170"]
+[ext_resource type="Shader" uid="uid://k44uksu72bhl" path="res://Shaders/2D_Pattern/Voronoi.gdshader" id="7_jui50"]
+[ext_resource type="Shader" uid="uid://xt4trygk0bus" path="res://Scenes/Flow_Fields/Particle_Flow_V2/Draw_UV.gdshader" id="7_tdnco"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_676dj"]
+viewport_path = NodePath("ParticleSubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_676dj"]
+shader = ExtResource("1_sif7m")
+shader_parameter/grid = Vector2(45, 45)
+shader_parameter/color_line = Color(0.35579363, 0.4193211, 0.3807496, 1)
+shader_parameter/line_width = 5.0
+shader_parameter/color_circle = Color(1, 1, 1, 1)
+shader_parameter/circle_radius = 3.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4inph"]
+viewport_path = NodePath("SamplerSubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8170"]
+shader = ExtResource("7_tdnco")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7pd2"]
+shader = ExtResource("3_sif7m")
+shader_parameter/blur_amount = 0.5000001187500001
+shader_parameter/mix_amount = 0.03000000468487998
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tdnco"]
+shader = ExtResource("1_4inph")
+shader_parameter/point_size = 180.0
+shader_parameter/point_color = Color(0.29454267, 0.67340225, 0.81249905, 0.23137255)
+shader_parameter/background_color = Color(0, 0, 0, 0)
+shader_parameter/p1 = Vector2(0.5, 0.5)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c8170"]
+size = Vector2(10, 10)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xumqa"]
+viewport_path = NodePath("SamplerSubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jui50"]
+resource_local_to_scene = true
+shader = ExtResource("2_xumqa")
+shader_parameter/flow_delta_weight = 0.25
+shader_parameter/flow_fixed_weight = 0.0
+shader_parameter/start_speed = 100.0
+shader_parameter/target_speed = 150.0
+shader_parameter/size = Vector2(1920, 1080)
+shader_parameter/area_margin = Vector2(0, 0)
+shader_parameter/flow_tex = SubResource("ViewportTexture_xumqa")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sif7m"]
+noise_type = 3
+frequency = 0.0012
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_676dj"]
+width = 1920
+height = 1080
+noise = SubResource("FastNoiseLite_sif7m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sif7m"]
+shader = ExtResource("4_xumqa")
+shader_parameter/column = 2.0
+shader_parameter/row = 1.5
+shader_parameter/amplitude = 1.0
+shader_parameter/min_distance = 0.0
+shader_parameter/color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kfdjm"]
+shader = ExtResource("7_jui50")
+shader_parameter/column = 15.0
+shader_parameter/row = 10.0
+shader_parameter/min_distance = 0.0
+shader_parameter/amplitude = 0.78
+shader_parameter/color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n5xi1"]
+shader = ExtResource("3_sif7m")
+shader_parameter/blur_amount = 0.0
+shader_parameter/mix_amount = 0.0
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[node name="ParticleFlowV2" type="Control" unique_id=1329400005]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1806105411]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=905450195]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=671850117]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=1399335200]
+layout_mode = 2
+
+[node name="DisplaySubViewport" type="SubViewport" parent="PanelContainer/HBoxContainer/VBoxContainer/SubViewportContainer" unique_id=743341645]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/SubViewportContainer/DisplaySubViewport" unique_id=574524544]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/SubViewportContainer/DisplaySubViewport/PanelContainer" unique_id=2102705753]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ParticlesTextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer/SubViewportContainer/DisplaySubViewport/PanelContainer/MarginContainer" unique_id=1441404886]
+layout_mode = 2
+texture = SubResource("ViewportTexture_676dj")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=1791386331]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/HBoxContainer/VBoxContainer/MarginContainer" unique_id=137620912]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="SamplerTextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer/MarginContainer" unique_id=519071804]
+material = SubResource("ShaderMaterial_676dj")
+instance_shader_parameters/show_vectors = true
+layout_mode = 2
+texture = SubResource("ViewportTexture_4inph")
+expand_mode = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=68126622]
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1411789212]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SamplerTextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer2/MarginContainer3" unique_id=302164788]
+layout_mode = 2
+texture = SubResource("ViewportTexture_4inph")
+expand_mode = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1194884259]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SamplerTextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer2/MarginContainer2" unique_id=1243249764]
+material = SubResource("ShaderMaterial_676dj")
+instance_shader_parameters/show_vectors = false
+layout_mode = 2
+texture = SubResource("ViewportTexture_4inph")
+expand_mode = 1
+
+[node name="UVColorRect" type="ColorRect" parent="." unique_id=152910197]
+material = SubResource("ShaderMaterial_c8170")
+custom_minimum_size = Vector2(1080, 1080)
+layout_mode = 1
+offset_left = 1931.0
+offset_top = 2169.0
+offset_right = 3011.0
+offset_bottom = 3249.0
+
+[node name="ParticleSubViewport" type="SubViewport" parent="." unique_id=1273421826]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_clear_mode = 2
+render_target_update_mode = 4
+
+[node name="Blur" type="ColorRect" parent="ParticleSubViewport" unique_id=1808005139]
+material = SubResource("ShaderMaterial_x7pd2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="ParticleSubViewport" unique_id=2024224623]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ParticleSubViewport/Control" unique_id=1363545256]
+material = SubResource("ShaderMaterial_tdnco")
+amount = 100000
+texture = SubResource("PlaceholderTexture2D_c8170")
+lifetime = 60.0
+randomness = 1.0
+process_material = SubResource("ShaderMaterial_jui50")
+
+[node name="SamplerSubViewport" type="SubViewport" parent="." unique_id=1376501882]
+size = Vector2i(1920, 1080)
+
+[node name="NoiseTextureRect" type="TextureRect" parent="SamplerSubViewport" unique_id=959439871]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_676dj")
+
+[node name="Cellular" type="ColorRect" parent="SamplerSubViewport" unique_id=1188779422]
+material = SubResource("ShaderMaterial_sif7m")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="SamplerSubViewport" unique_id=2107893783]
+material = SubResource("ShaderMaterial_kfdjm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CloudsTextureRect" type="TextureRect" parent="SamplerSubViewport" unique_id=459270845]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_c8170")
+expand_mode = 1
+
+[node name="Blur" type="ColorRect" parent="SamplerSubViewport" unique_id=543603969]
+material = SubResource("ShaderMaterial_n5xi1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

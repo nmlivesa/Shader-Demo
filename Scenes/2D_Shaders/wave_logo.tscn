@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bsolntuw8rlfx"]
 
-[ext_resource type="Shader" uid="uid://cp3eqc7km7fn0" path="res://Shaders/2D/wave_logo.gdshader" id="1_8bsdt"]
-[ext_resource type="Texture2D" uid="uid://b78ln46at8xgw" path="res://VGDC_Logo.png" id="2_0iui5"]
+[ext_resource type="Shader" uid="uid://cp3eqc7km7fn0" path="res://Shaders/2D_Pattern/wave_logo.gdshader" id="1_8bsdt"]
+[ext_resource type="Texture2D" uid="uid://b78ln46at8xgw" path="res://Assets/VGDC_Logo.png" id="2_0iui5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7k13c"]
 shader = ExtResource("1_8bsdt")

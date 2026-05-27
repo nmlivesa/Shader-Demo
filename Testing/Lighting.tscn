@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://vskndvkggyuv"]
+
+[ext_resource type="PackedScene" uid="uid://bn7c0ls5kmihr" path="res://Prefabs/GuideSpheres.tscn" id="1_ahflb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6hgi1"]
+
+[sub_resource type="Sky" id="Sky_slt6l"]
+sky_material = SubResource("ProceduralSkyMaterial_6hgi1")
+
+[sub_resource type="Environment" id="Environment_p86lj"]
+background_color = Color(1, 1, 1, 1)
+background_energy_multiplier = 0.0
+sky = SubResource("Sky_slt6l")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ahflb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_w3i18"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6hgi1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6hgi1"]
+size = Vector3(50, 0, 50)
+
+[sub_resource type="SphereMesh" id="SphereMesh_slt6l"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_p86lj"]
+top_radius = 0.0
+
+[node name="Lighting" type="Node3D" unique_id=246158926]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=986481011]
+environment = SubResource("Environment_p86lj")
+
+[node name="Box" type="CSGMesh3D" parent="." unique_id=773441636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_ahflb")
+mesh = SubResource("BoxMesh_w3i18")
+
+[node name="Ground" type="CSGMesh3D" parent="." unique_id=1150521670]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+material_override = SubResource("StandardMaterial3D_6hgi1")
+mesh = SubResource("BoxMesh_6hgi1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1619269367]
+transform = Transform3D(0.8544588, 0.16742319, -0.49180242, 0, 0.94664925, 0.32226568, 0.51951915, -0.27536276, 0.8088728, 0, 0, 0)
+visible = false
+shadow_enabled = true
+
+[node name="GuideSpheres" parent="." unique_id=811256493 instance=ExtResource("1_ahflb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2612696, 1.8427737, -0.030546665)
+
+[node name="BulbHolder" type="MeshInstance3D" parent="." unique_id=1550002536]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1287888, 3.2474911, 1.1211963)
+mesh = SubResource("SphereMesh_slt6l")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="BulbHolder" unique_id=716307835]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.7483873)
+shadow_enabled = true
+omni_range = 11.135
+omni_attenuation = 2.0
+
+[node name="SpotlightHolder" type="Node3D" parent="." unique_id=2038644036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6958594, 10.202265)
+metadata/_edit_group_ = true
+
+[node name="Cone" type="MeshInstance3D" parent="SpotlightHolder" unique_id=1994361291]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_p86lj")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SpotlightHolder" unique_id=37823468]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+shadow_enabled = true
+spot_range = 86.1
+spot_attenuation = 2.0

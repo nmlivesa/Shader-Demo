@@ -1,8 +1,8 @@
 shader_type canvas_item;
 
-uniform float point_size = 5.0;
+uniform float point_size = 180.0;
 uniform vec4 point_color : source_color = vec4(1.0);
-uniform vec4 background_color : source_color = vec4(1.0);
+uniform vec4 background_color : source_color = vec4(0.0);
 uniform vec2 p1 = vec2(0.5, 0.5);
 
 void vertex() {
@@ -11,7 +11,7 @@ void vertex() {
 
 void fragment() {
 	vec2 uv = UV;
-	COLOR = mix(background_color, point_color, float(length(uv - p1) < point_size * SCREEN_PIXEL_SIZE.x));
+	COLOR = mix(background_color, point_color, float(length(uv - p1) < point_size * SCREEN_PIXEL_SIZE.x ));
 	
 	
 }

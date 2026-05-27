@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bpnkwvpgx56lj"]
 
 [ext_resource type="Script" uid="uid://cq312p42w4vsp" path="res://Scenes/2D_Shaders/sine_wave_lerped.gd" id="1_duigb"]
-[ext_resource type="Shader" uid="uid://bvkuf0upk2kyr" path="res://Shaders/2D/swizzle_wave.gdshader" id="1_kaeq6"]
-[ext_resource type="Shader" uid="uid://cyb7dgxtrqtag" path="res://Shaders/2D/sine_wave_lerped.gdshader" id="1_mmlj5"]
-[ext_resource type="Texture2D" uid="uid://b78ln46at8xgw" path="res://VGDC_Logo.png" id="2_duigb"]
+[ext_resource type="Shader" uid="uid://bvkuf0upk2kyr" path="res://Shaders/2D_Pattern/swizzle_wave.gdshader" id="1_kaeq6"]
+[ext_resource type="Shader" uid="uid://cyb7dgxtrqtag" path="res://Shaders/2D_Pattern/sine_wave_lerped.gdshader" id="1_mmlj5"]
+[ext_resource type="Texture2D" uid="uid://b78ln46at8xgw" path="res://Assets/VGDC_Logo.png" id="2_duigb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rs5pn"]
 shader = ExtResource("1_kaeq6")

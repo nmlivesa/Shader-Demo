@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ckaa8km4degk3"]
 
-[ext_resource type="Shader" uid="uid://bpds07crg5ert" path="res://Shaders/2D/Voronoi_Wave.gdshader" id="1_p173r"]
+[ext_resource type="Shader" uid="uid://bpds07crg5ert" path="res://Shaders/2D_Pattern/Voronoi_Wave.gdshader" id="1_p173r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_03kdo"]
 shader = ExtResource("1_p173r")

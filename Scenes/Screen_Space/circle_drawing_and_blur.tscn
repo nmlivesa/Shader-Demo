@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://u4tumsneo8ee" path="res://Scenes/Screen_Space/circle_drawing_variable.gdshader" id="3_dx0dw"]
 [ext_resource type="Shader" uid="uid://7fwc5qrcjnt8" path="res://Shaders/Screen_Space/circle_drawing.gdshader" id="4_fgr0d"]
 [ext_resource type="Shader" uid="uid://je7siqqctw61" path="res://Scenes/Screen_Space/circle_drawing_loop.gdshader" id="5_hdymt"]
-[ext_resource type="Shader" uid="uid://exkaccjf3g77" path="res://Scenes/Screen_Space/blur.gdshader" id="6_edk3t"]
+[ext_resource type="Shader" uid="uid://exkaccjf3g77" path="res://Shaders/Screen_Space/blur.gdshader" id="6_edk3t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g8qa4"]
 shader = ExtResource("1_74p7q")

@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://nv4jfypr31gi"]
+
+[ext_resource type="Shader" uid="uid://b3g0o8l7csl4e" path="res://Shaders/2D_Shapes/draw_point.gdshader" id="1_wu6mi"]
+[ext_resource type="Shader" uid="uid://bxa30tx4jmgj1" path="res://Scenes/Flow_Fields/Particle_Flow_V1/particle_flow_v1.gdshader" id="2_wximu"]
+[ext_resource type="Texture2D" uid="uid://btuw7s5d8iu1a" path="res://Scenes/Flow_Fields/Particle_Flow_V1/flow_field_noise.tres" id="3_o8ihx"]
+[ext_resource type="Shader" uid="uid://exkaccjf3g77" path="res://Shaders/Screen_Space/blur.gdshader" id="4_62chi"]
+[ext_resource type="Script" uid="uid://dosunc3b0jtrb" path="res://Shaders/Screen_Space/blur.gd" id="5_il6nn"]
+[ext_resource type="Shader" uid="uid://bhb6cisxiqj4u" path="res://Scenes/Flow_Fields/Flow_Field_Test/Flow_Field_Test.gdshader" id="6_gxoqh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hnn4k"]
+shader = ExtResource("1_wu6mi")
+shader_parameter/point_size = 180.0
+shader_parameter/point_color = Color(1, 1, 1, 1)
+shader_parameter/background_color = Color(0, 0, 0, 0)
+shader_parameter/p1 = Vector2(0.5, 0.5)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_aec4d"]
+size = Vector2(10, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p3il1"]
+shader = ExtResource("2_wximu")
+shader_parameter/field_weight = 1.0
+shader_parameter/start_speed = 100.0
+shader_parameter/target_speed = 150.0
+shader_parameter/size = Vector2(1920, 1080)
+shader_parameter/area_margin = 20.0
+shader_parameter/noise_texture = ExtResource("3_o8ihx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8170n"]
+shader = ExtResource("4_62chi")
+shader_parameter/blur_amount = 0.13600010146000008
+shader_parameter/mix_amount = 0.03000000468487998
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aec4d"]
+shader = ExtResource("6_gxoqh")
+shader_parameter/grid = 100.0
+shader_parameter/color_line = Color(1, 1, 1, 0.16078432)
+shader_parameter/noise_texture = ExtResource("3_o8ihx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qwwnp"]
+shader = ExtResource("1_wu6mi")
+shader_parameter/point_size = 1.655
+shader_parameter/point_color = Color(0.68006647, 0.85987115, 0.8139492, 1)
+shader_parameter/background_color = Color(1, 1, 1, 0)
+shader_parameter/p1 = Vector2(0.5, 0.5)
+
+[node name="Particle_Flow_Field" type="Control" unique_id=479242218]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="." unique_id=54617374]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control" unique_id=230979087]
+custom_minimum_size = Vector2(1080, 1080)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer" unique_id=1924770118]
+handle_input_locally = false
+size = Vector2i(2020, 1480)
+render_target_clear_mode = 2
+render_target_update_mode = 4
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Control/SubViewportContainer/SubViewport" unique_id=2130293670]
+material = SubResource("ShaderMaterial_hnn4k")
+position = Vector2(50, 200)
+amount = 1000000
+texture = SubResource("PlaceholderTexture2D_aec4d")
+lifetime = 90.0
+randomness = 1.0
+local_coords = true
+process_material = SubResource("ShaderMaterial_p3il1")
+
+[node name="Blur" type="ColorRect" parent="Control/SubViewportContainer/SubViewport" unique_id=82501056]
+material = SubResource("ShaderMaterial_8170n")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_il6nn")
+
+[node name="Vector_Lines" type="ColorRect" parent="Control" unique_id=1962949256]
+material = SubResource("ShaderMaterial_aec4d")
+instance_shader_parameters/show_vectors = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -1180.0
+offset_right = 17.0
+offset_bottom = -1180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=2064995086]
+size = Vector2i(4, 4)
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport" unique_id=2073594963]
+material = SubResource("ShaderMaterial_qwwnp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

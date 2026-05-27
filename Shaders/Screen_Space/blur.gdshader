@@ -2,9 +2,9 @@ shader_type canvas_item;
 
 
 uniform float blur_amount : hint_range(-2.0, 10.0);
-uniform float mix_amount : hint_range(-0.1, 0.5);
+uniform float mix_amount : hint_range(-0.5, 0.5);
 uniform vec4 color_over : source_color;
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_nearest_mipmap;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 // filter_nearest_mipmap creates a blocky blur. for smoother bluring swap to filter_linear_mipmap
 void fragment() {
    vec4 blurred = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur_amount);

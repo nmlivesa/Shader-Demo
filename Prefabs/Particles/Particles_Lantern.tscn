@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://ckmcsamxmd18k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_51vdi"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="Curve" id="Curve_4v785"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_u6d8p"]
+curve = SubResource("Curve_4v785")
+
+[sub_resource type="Gradient" id="Gradient_20ngn"]
+offsets = PackedFloat32Array(0, 0.92050207, 1)
+colors = PackedColorArray(0.40208313, 0.9999998, 0.47968477, 1, 0.024935395, 0.8246412, 0.86385226, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_717n8"]
+gradient = SubResource("Gradient_20ngn")
+
+[sub_resource type="Curve" id="Curve_5v064"]
+_limits = [0.0, 250.0, 0.0, 1.0]
+_data = [Vector2(0, 250), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_8ypfk"]
+curve = SubResource("Curve_5v064")
+
+[sub_resource type="Curve" id="Curve_wtewx"]
+_data = [Vector2(0, 0.09779179), 0.0, 0.0, 0, 0, Vector2(0.7924529, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.45597988, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qifo8"]
+curve = SubResource("Curve_wtewx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2t1wm"]
+emission_shape = 2
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 0.19999999
+initial_velocity_max = 0.19999999
+gravity = Vector3(0, 0.01, 0)
+scale_min = 0.75
+scale_max = 1.25
+scale_curve = SubResource("CurveTexture_qifo8")
+color_initial_ramp = SubResource("GradientTexture1D_717n8")
+alpha_curve = SubResource("CurveTexture_u6d8p")
+emission_curve = SubResource("CurveTexture_8ypfk")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3mk8t"]
+top_radius = 0.01
+bottom_radius = 0.0
+height = 0.1
+
+[node name="Lantern" type="GPUParticles3D" unique_id=856052668]
+material_override = SubResource("StandardMaterial3D_51vdi")
+amount = 32
+lifetime = 8.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_2t1wm")
+draw_pass_1 = SubResource("CylinderMesh_3mk8t")
