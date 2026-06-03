@@ -182,6 +182,7 @@ transform = Transform3D(0.99999994, 0, 0, 0, 0.8660254, 0.49999994, 0, -0.5, 0.8
 [node name="Attractors" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1169662743]
 
 [node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="SubViewportContainer/SubViewport/Attractors" unique_id=2077073256]
+visible = false
 attenuation = 3.8637445
 size = Vector3(30, 30, 30)
 

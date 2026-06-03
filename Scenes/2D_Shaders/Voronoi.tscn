@@ -7,7 +7,7 @@ shader = ExtResource("1_2veo6")
 shader_parameter/column = 10.0
 shader_parameter/row = 5.0
 shader_parameter/min_distance = 0.01
-shader_parameter/amplitude = 0.25
+shader_parameter/amplitude = 1.0
 shader_parameter/color = Color(0.3770896, 0.714091, 0.72867924, 1)
 
 [node name="Voronoi" type="ColorRect" unique_id=1825525715]

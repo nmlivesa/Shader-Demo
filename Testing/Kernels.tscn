@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://e3ioj3etxlv8"]
+
+[ext_resource type="Shader" uid="uid://diak2k45am87d" path="res://Testing/Diffusion.gdshader" id="1_ddlck"]
+[ext_resource type="Script" uid="uid://qccp05qq4xyn" path="res://Testing/Diffusion_Animation.gd" id="2_yc6fy"]
+[ext_resource type="Shader" uid="uid://exkaccjf3g77" path="res://Shaders/Screen_Space/blur.gdshader" id="3_yc6fy"]
+
+[sub_resource type="Gradient" id="Gradient_yc6fy"]
+offsets = PackedFloat32Array(0, 0.42668864, 0.752883, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0.7, 0.58333325, 0.85490197, 0, 0.9298407, 0.77425736, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0u1k6"]
+gradient = SubResource("Gradient_yc6fy")
+fill = 1
+fill_from = Vector2(0.5, 0.47863248)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8c78x"]
+shader = ExtResource("1_ddlck")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0u1k6"]
+shader = ExtResource("3_yc6fy")
+shader_parameter/blur_amount = 0.0
+shader_parameter/mix_amount = 0.1000000285
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[node name="Kernels" type="Control" unique_id=978627373]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=799767095]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1946694494]
+handle_input_locally = false
+size = Vector2i(1920, 1024)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=1454256919]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_0u1k6")
+
+[node name="Corner Bricks" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1155740663]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect3" type="ColorRect" parent="SubViewportContainer/SubViewport/Corner Bricks" unique_id=1910927020]
+layout_mode = 1
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="ColorRect4" type="ColorRect" parent="SubViewportContainer/SubViewport/Corner Bricks" unique_id=878427905]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 64.0
+grow_horizontal = 0
+
+[node name="ColorRect5" type="ColorRect" parent="SubViewportContainer/SubViewport/Corner Bricks" unique_id=1656569083]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ColorRect6" type="ColorRect" parent="SubViewportContainer/SubViewport/Corner Bricks" unique_id=274142508]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -64.0
+offset_right = 32.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewportContainer/SubViewport" unique_id=1076424448]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="Diffusion" type="ColorRect" parent="SubViewportContainer/SubViewport/MarginContainer" unique_id=1091076171]
+material = SubResource("ShaderMaterial_8c78x")
+instance_shader_parameters/blur_amount = 0.0
+instance_shader_parameters/fixed_offset = 0.0
+instance_shader_parameters/fixed_offset_vec2 = Vector2(0, 0)
+instance_shader_parameters/pixel_offset = 1.0
+layout_mode = 2
+color = Color(0, 0, 0, 0)
+script = ExtResource("2_yc6fy")
+animate_rotation = true
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="SubViewportContainer/SubViewport" unique_id=1676313986]
+copy_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=324757274]
+material = SubResource("ShaderMaterial_0u1k6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true

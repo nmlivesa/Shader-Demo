@@ -18,15 +18,15 @@ colors = PackedColorArray(0.40208313, 0.9999998, 0.47968477, 1, 0.024935395, 0.8
 gradient = SubResource("Gradient_20ngn")
 
 [sub_resource type="Curve" id="Curve_5v064"]
-_limits = [0.0, 250.0, 0.0, 1.0]
-_data = [Vector2(0, 250), 0.0, 0.0, 0, 0]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 100), 0.0, 0.0, 0, 0]
 point_count = 1
 
 [sub_resource type="CurveTexture" id="CurveTexture_8ypfk"]
 curve = SubResource("Curve_5v064")
 
 [sub_resource type="Curve" id="Curve_wtewx"]
-_data = [Vector2(0, 0.09779179), 0.0, 0.0, 0, 0, Vector2(0.7924529, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.45597988, 0.0, 0, 0]
+_data = [Vector2(0, 0.10804415), 0.0, 0.0, 0, 0, Vector2(0.7924529, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.45597988, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_qifo8"]
@@ -34,10 +34,10 @@ curve = SubResource("Curve_wtewx")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2t1wm"]
 emission_shape = 2
-emission_sphere_radius = 1.0
+emission_sphere_radius = 0.5
 direction = Vector3(0, 1, 0)
-initial_velocity_min = 0.19999999
-initial_velocity_max = 0.19999999
+initial_velocity_min = 0.049999997
+initial_velocity_max = 0.14999999
 gravity = Vector3(0, 0.01, 0)
 scale_min = 0.75
 scale_max = 1.25
@@ -46,15 +46,14 @@ color_initial_ramp = SubResource("GradientTexture1D_717n8")
 alpha_curve = SubResource("CurveTexture_u6d8p")
 emission_curve = SubResource("CurveTexture_8ypfk")
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_3mk8t"]
-top_radius = 0.01
-bottom_radius = 0.0
-height = 0.1
+[sub_resource type="QuadMesh" id="QuadMesh_51vdi"]
+size = Vector2(0.01, 0.1)
 
 [node name="Lantern" type="GPUParticles3D" unique_id=856052668]
 material_override = SubResource("StandardMaterial3D_51vdi")
-amount = 32
+amount = 16
 lifetime = 8.0
 randomness = 1.0
+transform_align = 1
 process_material = SubResource("ParticleProcessMaterial_2t1wm")
-draw_pass_1 = SubResource("CylinderMesh_3mk8t")
+draw_pass_1 = SubResource("QuadMesh_51vdi")

@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://ohvm1l13gcck"]
+
+[ext_resource type="Shader" uid="uid://exkaccjf3g77" path="res://Shaders/Screen_Space/blur.gdshader" id="1_aemrd"]
+[ext_resource type="Shader" uid="uid://bl0x5cy5twjds" path="res://Shaders/Screen_Space/blur_filter_nearest.gdshader" id="2_se3i4"]
+[ext_resource type="Shader" uid="uid://diak2k45am87d" path="res://Testing/Diffusion.gdshader" id="3_se3i4"]
+[ext_resource type="Shader" uid="uid://b2aaqosjffmyb" path="res://Scenes/Flow_Fields/Particle_Mold_Experimental/Particle_Mold_2_Experimental.gdshader" id="4_iicsx"]
+[ext_resource type="Shader" uid="uid://dvgvec76vtau6" path="res://Scenes/Flow_Fields/Particle_Mold_Experimental/Color_Particle_By_Position.gdshader" id="4_yg5vy"]
+[ext_resource type="Shader" uid="uid://blle2rihi0t53" path="res://Scenes/Flow_Fields/Particle_Mold_Experimental/Fade_Color.gdshader" id="5_iicsx"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_yg5vy"]
+viewport_path = NodePath("ParticleSubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o3pug"]
+shader = ExtResource("1_aemrd")
+shader_parameter/blur_amount = 0.0
+shader_parameter/mix_amount = -0.5
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7p830"]
+shader = ExtResource("2_se3i4")
+shader_parameter/blur_amount = 0.0
+shader_parameter/mix_amount = 0.0
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iicsx"]
+shader = ExtResource("3_se3i4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n70os"]
+shader = ExtResource("4_yg5vy")
+
+[sub_resource type="Gradient" id="Gradient_iicsx"]
+offsets = PackedFloat32Array(0, 0.9288703)
+colors = PackedColorArray(1, 1, 1, 0.83137256, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yg5vy"]
+gradient = SubResource("Gradient_iicsx")
+width = 8
+height = 8
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p1rod"]
+shader = ExtResource("4_iicsx")
+shader_parameter/sample_angle = 0.1
+shader_parameter/start_speed = 100.0
+shader_parameter/target_speed = 50.0
+shader_parameter/minimun_speed = 50.0
+shader_parameter/size = Vector2(1920, 1080)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_it80s"]
+shader = ExtResource("1_aemrd")
+shader_parameter/blur_amount = -2.0
+shader_parameter/mix_amount = 0.5
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yg5vy"]
+shader = ExtResource("5_iicsx")
+shader_parameter/fade_constant = 1.015
+
+[node name="ParticleMoldV1Exp" type="Control" unique_id=1283243296]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1242742141]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1480260743]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=2026770802]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_yg5vy")
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=1300867612]
+material = SubResource("ShaderMaterial_o3pug")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ParticleSubViewport" type="SubViewport" parent="." unique_id=195137840]
+size = Vector2i(1920, 1080)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="BlurNearest" type="ColorRect" parent="ParticleSubViewport" unique_id=1082255280]
+visible = false
+material = SubResource("ShaderMaterial_7p830")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ParticleSubViewport" unique_id=1401828135]
+material = SubResource("ShaderMaterial_iicsx")
+instance_shader_parameters/blur_amount = 0.2790000132525
+instance_shader_parameters/fixed_offset = 0.0
+instance_shader_parameters/pixel_offset = 21.25
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="MoldParticles_2" type="GPUParticles2D" parent="ParticleSubViewport" unique_id=459735112]
+material = SubResource("ShaderMaterial_n70os")
+amount = 451
+texture = SubResource("GradientTexture2D_yg5vy")
+lifetime = 600.0
+explosiveness = 1.0
+process_material = SubResource("ShaderMaterial_p1rod")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="ParticleSubViewport" unique_id=1398132422]
+copy_mode = 2
+
+[node name="Blur" type="ColorRect" parent="ParticleSubViewport" unique_id=1056539028]
+visible = false
+material = SubResource("ShaderMaterial_it80s")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Fade" type="ColorRect" parent="ParticleSubViewport" unique_id=24572334]
+material = SubResource("ShaderMaterial_yg5vy")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="." unique_id=1107480690]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3840.0
+offset_right = 3840.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2" unique_id=2058471030]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer2/SubViewport" unique_id=1438170017]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer2/SubViewport" unique_id=183510560]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
